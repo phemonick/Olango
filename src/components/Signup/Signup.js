@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { StyleSheet, View, Image, Text, TouchableOpacity, KeyboardAvoidingView } from 'react-native'
-import LoginForm from './LoginForm'
-class Login extends Component{
+import SignupForm from './SignupForm'
+
+class Signup extends Component{
     render(){
         return (
             <KeyboardAvoidingView style = {styles.container}>
@@ -11,10 +12,13 @@ class Login extends Component{
                 </TouchableOpacity>
                 <View style= {styles.logoContainer}>
                     <Image style = {styles.logo} source = {require('../../images/olango.png')} />
-                    <Text style = {styles.logoText}>The global world of language</Text>
+                    <Text style = {styles.logoText}>The global world of languages</Text>
                 </View>
+                <TouchableOpacity >
+                    <Image style = {styles.camera} source = {require('../../images/camera.png')} />
+                </TouchableOpacity>
                 <View style = {styles.formContainer} >
-                    <LoginForm />
+                    <SignupForm />
                 </View>
             </View>
             </KeyboardAvoidingView>
@@ -22,48 +26,50 @@ class Login extends Component{
         )
     }
 }
-export default Login;
+export default Signup;
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#34495e',
-        padding: 10
     },
     content: {
-        
+        display: 'flex',
+        alignItems: 'center'
     },
     arrowLogo: {
-        width: 100,
-        padding: 10,
-        marginBottom:20,
+        width: 50,
+        alignSelf: 'flex-start',
+        padding: 20,
+        marginBottom:10,
         height: 40,
         
     },
     arrow: {
         width: 40,
-        height: 30,
+        height: 20,
         padding: 10
     },
     logoContainer: {
-        width:  300,
-        height: 150,
-        alignItems: 'center',
-        margin: 10
+        width: 100 + '%',
+        alignSelf: 'flex-start'
     },
     logo: {
-        width: 370,
-        height: 100,
-       
-        
+        width: 100+'%',
+        height: 50,  
+        resizeMode: 'contain'    
     },
     logoText: {
         color: '#3498db',
-        fontSize: 20,
+        textAlign: 'center',
+        fontSize: 15,
         marginTop: 5,
-        opacity: 0.5
-
-
+        opacity: 0.5,
+        marginBottom: 10
+    },
+    camera: {
+        width: 70,
+        height: 70,
     },
     formContainer: {
         margin: 20,

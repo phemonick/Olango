@@ -11,13 +11,13 @@ import {
   View
 } from 'react-native';
 import Login from './src/components/Login/Login'
-
+import Signup from './src/components/Signup/Signup'
 
  
 export default class App extends Component {
   render() {
     return (
-      <Login />
+      <Signup />
     );
   }
 }

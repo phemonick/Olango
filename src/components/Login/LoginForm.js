@@ -8,6 +8,7 @@ class LoginForm extends Component {
                 <StatusBar barStyle = 'light-content' />
                 <TextInput 
                     style = {styles.input}
+                    underlineColorAndroid = 'transparent'
                     placeholder ='username'
                     returnKeyType = 'next'
                     autoCapitalize = 'none'
@@ -15,7 +16,8 @@ class LoginForm extends Component {
                     onSubmitEditing = {() => this.passwordInput.focus()}
                  />
                  <TextInput 
-                 placeholder ='password'            
+                 placeholder ='password'  
+                 underlineColorAndroid = 'transparent'          
                  returnKeyType = 'go'
                  secureTextEntry
                  style = {styles.input}
@@ -44,6 +46,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(255,255,255,1)',
         marginBottom: 15,
         height: 40,
+        textAlign: 'center',
         color: '#fff',
         borderRadius: 6,
         paddingHorizontal: 20
