@@ -1,4 +1,4 @@
 import { AppRegistry } from 'react-native';
-import App from './App';
+import nativeShop from './src/components/app'
 
-AppRegistry.registerComponent('Olango', () => App);
+AppRegistry.registerComponent('Olango', () => nativeShop);

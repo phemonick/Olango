@@ -4,6 +4,7 @@ import SignupForm from './SignupForm'
 
 class Signup extends Component{
     render(){
+        const { navigate } = this.props.navigation;
         return (
             <KeyboardAvoidingView style = {styles.container}>
             <View style = {styles.content} >
@@ -18,7 +19,7 @@ class Signup extends Component{
                     <Image style = {styles.camera} source = {require('../../images/camera.png')} />
                 </TouchableOpacity>
                 <View style = {styles.formContainer} >
-                    <SignupForm />
+                    <SignupForm navigate = {navigate} />
                 </View>
             </View>
             </KeyboardAvoidingView>
@@ -73,7 +74,7 @@ const styles = StyleSheet.create({
     },
     formContainer: {
         margin: 20,
-        marginBottom: 0,
+        marginTop: 0,
         alignSelf: 'stretch',
         padding: 20,
     }

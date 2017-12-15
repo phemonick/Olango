@@ -3,6 +3,8 @@ import { StyleSheet, View, Image, Text, TouchableOpacity, KeyboardAvoidingView }
 import LoginForm from './LoginForm'
 class Login extends Component{
     render(){
+        const { navigate } = this.props.navigation;
+
         return (
             <KeyboardAvoidingView style = {styles.container}>
             <View style = {styles.content} >
@@ -14,7 +16,7 @@ class Login extends Component{
                     <Text style = {styles.logoText}>The global world of language</Text>
                 </View>
                 <View style = {styles.formContainer} >
-                    <LoginForm />
+                    <LoginForm navigate = {navigate} />
                 </View>
             </View>
             </KeyboardAvoidingView>
@@ -46,22 +48,22 @@ const styles = StyleSheet.create({
         padding: 10
     },
     logoContainer: {
-        width:  300,
-        height: 150,
-        alignItems: 'center',
-        margin: 10
+        width: 100 + '%',
+        alignSelf: 'flex-start',
+        marginBottom: 20
     },
     logo: {
-        width: 370,
-        height: 100,
-       
-        
+        width: 100+'%',
+        height: 60,  
+        resizeMode: 'contain'    
     },
     logoText: {
         color: '#3498db',
-        fontSize: 20,
+        fontSize: 15,
         marginTop: 5,
-        opacity: 0.5
+        opacity: 0.5,
+        alignSelf: 'center'
+        
 
 
     },

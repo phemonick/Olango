@@ -12,12 +12,13 @@ import {
 } from 'react-native';
 import Login from './src/components/Login/Login'
 import Signup from './src/components/Signup/Signup'
+import Home from './src/components/Home/Home'
 
  
 export default class App extends Component {
   render() {
     return (
-      <Signup />
+      <Home />
     );
   }
 }

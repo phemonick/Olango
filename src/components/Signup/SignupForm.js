@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet, TouchableOpacity, TextInput, Picker } from 'react-native'
+import { Text, View, StyleSheet, TouchableOpacity, TextInput, Picker, KeyboardAvoidingView } from 'react-native'
 
 
 class SignupForm extends Component {
@@ -7,15 +7,23 @@ class SignupForm extends Component {
     constructor(){
         super();
         this.state = {
+            email: '',
+            name: '',
+            password: '',
            sex: '',
            language: ''
         }
     }
 
+    onRegister(){
+        
+    }
+
     render() {
         return(
-            <View style = {styles.container} >
+            <KeyboardAvoidingView keyboardVerticalOffset={70} style = {styles.container} >
                 <TextInput 
+                    onChangeText = { (text)=> this.setState({name: text}) }
                     style = {styles.input}
                     underlineColorAndroid = 'transparent'
                     placeholder ='First Name'
@@ -25,14 +33,17 @@ class SignupForm extends Component {
                     onSubmitEditing = {() => this.passwordInput.focus()}
                  />
                  <TextInput 
+                    onChangeText = { (text)=> this.setState({password: text}) }
                     style = {styles.input}
                     underlineColorAndroid = 'transparent'
-                    placeholder ='Last Name'
+                    placeholder ='Password'
+                    secureTextEntry
                     returnKeyType = 'next'
                     autoCapitalize = 'none'
                     autoCorrect = {false}
                  />
                   <TextInput 
+                    onChangeText = { (text)=> this.setState({email: text}) }
                     style = {styles.input}
                     underlineColorAndroid = 'transparent'
                     placeholder ='Email'
@@ -62,13 +73,13 @@ class SignupForm extends Component {
                     <Picker.Item label="Spanish" value="Spanish" />
                 </Picker>
                 </View>
-                <TouchableOpacity style = {styles.register} >
+                <TouchableOpacity onPress={()=> this.props.navigate('Home')} style = {styles.register} >
                     <Text style = {styles.registerText}> Register </Text>
                 </TouchableOpacity>
                 <TouchableOpacity style = {styles.exist} >
                     <Text style = {styles.existText}> I already have an account<Text style={styles.signIn}> SIGN IN </Text> </Text>
                 </TouchableOpacity>
-            </View>
+            </KeyboardAvoidingView>
         )
     }
 }
