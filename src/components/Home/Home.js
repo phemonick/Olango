@@ -24,6 +24,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#34495e',
+        display: 'flex'
     },
     logoContainer: {
         width: 100 + '%',
@@ -36,7 +37,9 @@ const styles = StyleSheet.create({
         marginTop: 10
     },
     card: {
-        height: 60+ '%'
+        height: 70+ '%',
+        alignSelf: 'center'
+
     },
     learn: {
         color: '#fff',

@@ -7,7 +7,9 @@ export default class Screen extends Component {
         
         return(
             <View style = {styles.container}>
-                <VideoPlayer />
+                
+                    <VideoPlayer />
+                
             </View>
         )
     }
@@ -16,6 +18,10 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#34495e',
-        padding: 10
+        
+        
     },
+    video: {
+        
+    }
 })

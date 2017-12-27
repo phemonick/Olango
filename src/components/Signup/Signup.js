@@ -6,7 +6,7 @@ class Signup extends Component{
     render(){
         const { navigate } = this.props.navigation;
         return (
-            <KeyboardAvoidingView style = {styles.container}>
+            <KeyboardAvoidingView keyboardVerticalOffset={-40} behavior='position' style = {styles.container}>
             <View style = {styles.content} >
                  <TouchableOpacity style= {styles.arrowLogo}>
                     <Image style = {styles.arrow} source = {require('../../images/arrow.png')} />

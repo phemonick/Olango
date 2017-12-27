@@ -14,7 +14,7 @@ class HomeCard extends Component {
                         </CardItem>
                         </TouchableOpacity>
 
-                        <TouchableOpacity style = {styles.cardItem}>
+                        <TouchableOpacity onPress={()=> this.props.navigate('Lessons') } style = {styles.cardItem}>
                         <CardItem style = {styles.english}>
                             <Text style = {styles.cardText} > English </Text>
                         </CardItem>
@@ -59,18 +59,20 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'row',
         flexWrap: 'wrap',
-        justifyContent: 'center',
+        justifyContent: 'space-around',
         backgroundColor: 'rgba(255, 255, 255, 0.1)',
 
     },
     cardItem: {
         margin: 5,
         width: 40+ '%',
-        display: 'flex'
+        flexGrow: 1,
+
     },
     cardText: {
         alignSelf: 'center',
         padding: 15,
+        fontSize: 20,
         color: '#fff'
     },
     header: {
@@ -81,21 +83,33 @@ const styles = StyleSheet.create({
         marginTop: 0
     },
     french: {
+        display: 'flex',
+        justifyContent: 'center',
         backgroundColor: '#2ecc71'
     },
     english: {
+        display: 'flex',
+        justifyContent: 'center',
         backgroundColor: '#f1c40f'
     },
     deutch: {
+        display: 'flex',
+        justifyContent: 'center',
         backgroundColor: '#27ae60'
     },
     igbo: {
+        display: 'flex',
+        justifyContent: 'center',
         backgroundColor: '#3498db'
     },
     yoruba: {
+        display: 'flex',
+        justifyContent: 'center',
         backgroundColor: '#e74c3c'
     },
     spanish: {
+        display: 'flex',
+        justifyContent: 'center',
         backgroundColor: '#8e44ad'
     }
 })

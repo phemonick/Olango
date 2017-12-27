@@ -8,12 +8,19 @@ import SignUp from './Signup/Signup';
 import Menu from './menu';
 import SignIn from './Social/signIn'
 import Screen from './VideoPlayer/Screen'
+import Lessons from './Lessons/Lessons'
+
 
 const myDrawer = DrawerNavigator({
     Home: { screen: Login,
         navigationOptions: {
             header: null,
           },
+    },
+    SignIn: { screen: SignIn,
+        navigationOptions: {
+        header: null,
+        },
     },
     Hom: { screen: Home,
         navigationOptions: {
@@ -29,7 +36,12 @@ const myDrawer = DrawerNavigator({
         navigationOptions: {
             header: null,
           },
-
+    },
+    Lessons: {
+        screen: Lessons,
+        navigationOptions: {
+            
+        }
     }
 },
 {
@@ -57,8 +69,20 @@ const nativeShop = StackNavigator({
         navigationOptions: {
             header: null,
           },
+        },
+    SignIn: { screen: SignIn,
+        navigationOptions: {
+        header: null,
+        }
+    },
+    Lessons: {
+        screen: Lessons,
+        navigationOptions: {
 
+        }
     }
+
+    
 });
 
 export default nativeShop;

@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, TextInput, TouchableOpacity, AsyncStorage, Text,KeyboardAvoidingView, StatusBar } from 'react-native';
 
+//for asyncStorage, global to the app
+const ACCESS_TOKEN = 'access_token';
+
 class LoginForm extends Component {
 
 constructor(){
@@ -26,6 +29,38 @@ passwordChange(text){
     console.log(this.state.password)
 
 }
+async storeToken(accesstoken){
+    try {
+        await AsyncStorage.setItem(ACCESS_TOKEN, accesstoken)
+
+    }
+    catch(error){
+        console.log('error : ' + err)
+    }
+}
+
+async getToken(accesstoken){
+    try {
+     const value = await AsyncStorage.getItem(ACCESS_TOKEN)
+        // if (value !== null){
+        //     console.log(value)
+        // }
+    }
+    catch(error){
+        console.log('error : ' + err)
+    }
+}
+
+async removeToken(accesstoken){
+    try {
+     const value = await AsyncStorage.removeItem(ACCESS_TOKEN)
+     this.getToken()
+    }
+    catch(error){
+        console.log('error : ' + err)
+    }
+}
+
 async onLoginPressed(){
     try{
         console.log('password is'+ this.state.password)
@@ -44,14 +79,23 @@ async onLoginPressed(){
         })
         let res = await response.text()
         console.log(res)
-
-        
+        if (res.status >=200 && response.status < 300){
+            this.setState({error: ''});
+            console.log(res)
+            // this.storeToken(accesToken);
+        } else {
+            let error = res;
+            console.log('There has been a problem with your fetch operation: ' + error);
+            throw error;
+        }      
     }
     catch(err){
-        console.log(err)
-        this.setState({error: err})
+        // this.removeToken()
+        console.log('There has been a problem with your fetch operation: ' + err);
+        throw err
         
-        throw(err)
+        this.setState({error: err})      
+        
 
     }
 }
@@ -72,13 +116,15 @@ async onLoginPressed(){
                  <TextInput 
                  onChangeText = { this.passwordChange.bind(this) }
                  placeholder ='Password'  
+                 autoCapitalize = 'none'
                  underlineColorAndroid = 'transparent'          
                  returnKeyType = 'go'
+                 
                  secureTextEntry
                  style = {styles.input}
 
                  />
-                 <TouchableOpacity onPress={()=> this.props.navigate('Hom')} style = {styles.buttonContainer} >
+                 <TouchableOpacity onPress={this.onLoginPressed.bind(this)} style = {styles.buttonContainer} >
                     <Text style = {styles.buttonText} > LOGIN </Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={()=> this.props.navigate('SignUp')} style = {styles.signUp} >

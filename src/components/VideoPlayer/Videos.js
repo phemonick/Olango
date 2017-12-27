@@ -1,55 +1,38 @@
 import React, { Component } from 'react';
 import { StyleSheet, View } from 'react-native'
-import  Video  from 'react-native-video'
+import  VideoPlayer  from 'react-native-video-controls'
 
-export default class VideoPlayer extends Component {
+export default class VideoMedia extends Component {
 
     render(){
         return(
-            <Video source={{uri: "https://www.youtube.com/watch?v=0BBGUmfVJ94"}}   
-            ref={(ref) => {
-              this.player = ref
-            }}                                     
-            rate={1.0}                              
-            volume={1.0}                            
-            muted={false}                          
-            paused={false}                         
-            resizeMode="cover"                     
-            repeat={true}                          
-            playInBackground={false}                
-            playWhenInactive={false}                
-            ignoreSilentSwitch={"ignore"}            
-            progressUpdateInterval={250.0}           
-            onLoadStart={this.loadStart}             
-            onLoad={this.setDuration}               
-            onProgress={this.setTime}               
-            onEnd={this.onEnd}                      
-            onError={this.videoError}               
-            onBuffer={this.onBuffer}                
-            onTimedMetadata={this.onTimedMetadata}  
-            style={styles.backgroundVideo} />
-    
+          <VideoPlayer source={{uri: "https://res.cloudinary.com/shopspreeng/video/upload/v1513296099/Olango/French/A1/LESSON_1.mp4", mainVer: 1, patchVer: 0}} // Looks for .mp4 file (background.mp4) in the given expansion version. 
+            navigator={ this.props.navigator }
+            seekColor={ '#3498db' }             // fill/handle colour of the seekbar
+            videoStyle={ {} }                // Style appended to <Video> component
+            style={ {} }                     // Style appended to <View> container
+        
+            // event callbacks
+            onError={ () => {} }             // Fired when an error is encountered on load
+            onBack={ () => {} }              // Function fired when back button is pressed.
+            onEnd={ () => {} }               // Fired when the video is complete.
+        
+            // disabling individual controls
+            disableFullscreen={ false }      // Used to hide the Fullscreen control.
+            disableSeekbar={ false }         // Used to hide the Seekbar control.
+            disableVolume={ false }          // Used to hide the Volume control.
+            disableBack={ false }            // Used to hide the Back control.
+            disableTimer={ false }           // Used to hide the Timer control.
+            />
         )
-        
-     // Later to trigger fullscreen 
-     this.player.presentFullscreenPlayer()
-      
-     // To set video position in seconds (seek) 
-     this.player.seek(0)
-        
-     // Later on in your styles.. 
-     
-    
-        
+      }
     }
-}
-
-const styles = StyleSheet.create({
-    backgroundVideo: {
-      position: 'absolute',
-      top: 0,
-      left: 0,
-      bottom: 0,
-      right: 0,
-    },
-  });
+   // Later on in your styles.. 
+   const styles = StyleSheet.create({
+     backgroundVideo: {
+       height: 500,
+       width: 80+ '%',
+       margin: 20
+     },
+   })
+           
