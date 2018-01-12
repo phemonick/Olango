@@ -36,11 +36,17 @@ export default class Exercises extends Component {
     }
 }
 
-  componentDidMount(){
-    const { params } = this.props.navigation.state
+  componentWillMount(){
+   const { params } = this.props.navigation.state
     let items = params.exercise
-   let questions = this.questionObj(items.answers, items.exercises, items.questions)
-    // console.log(this.state.exercise);
+    this.setState({
+      exercise: items
+    })
+  //  let questions = this.questionObj(items.answers, items.exercises, items.questions)
+   
+  }
+  componentDidMount(){
+    console.log(this.state.exercise);
   }
   submitText(){
     if(this.state.answer == this.state.status){
@@ -84,52 +90,49 @@ export default class Exercises extends Component {
 
   render() {
     // console.log({myState:this.state.exercise})
-    const { exercise } = this.state
+    const { params } = this.props.navigation.state
     // console.log(exercise)
 
     return (
       <Container>
-        <Header />
+        <Header style={styles.header}><Text style={styles.headerText}>{params.language} Exercises</Text></Header>
         <View>
           <DeckSwiper
             ref={(c) => this._deckSwiper = c}
-            dataSource={Examples}
+            dataSource={this.state.exercise}
             renderItem={item =>
               <Card style={{ elevation: 3 }}>
-                <CardItem>
-                  <Left>
-                    <Body>
-                      <Text>Hello</Text>
-                      <Text note>{item.exercise} ?</Text>
-                      <TextInput 
-                      onChangeText = {(text)=>{
-                        this.setState({
-                          status:text,
-                          answer: item.answers,
-        
-                        })
-                        question = item.question
-                      } }
-                      underlineColorAndroid='red'
+                <CardItem style = {styles.card1}>
+                  
+                    <Body style={styles.body} >
                       
-                        style = { styles.input }
-                      />
-                      <Text> {item.subquestion} </Text>
+                        <Text style={styles.quest}>{item.exercise} ?</Text>
+                        <TextInput 
+                        onChangeText = {(text)=>{
+                          this.setState({
+                            status:text,
+                            answer: item.answers,
+          
+                          })
+                          question = item.question
+                        } }
+                        underlineColorAndroid='red'
+                        
+                          style = { styles.input }
+                        />
+                        <Text> {item.subquestion} </Text>
                     </Body>
+
                     <TouchableOpacity onPress={this.submitText.bind(this)} >
-                      <Text
-                        
-                      > Submit </Text>
-                      
+                      <Text> Submit </Text>
                     </TouchableOpacity>
+
                     <TouchableOpacity onPress={this.sum.bind(this)} >
-                      <Text
-                        
-                      > Finish </Text>
-                      </TouchableOpacity>
-                  </Left>
+                      <Text> Finish </Text>
+                    </TouchableOpacity>
+                  
                 </CardItem>
-                <CardItem cardBody>
+                <CardItem >
                 </CardItem>
                 <CardItem>
                   <Text>{item.answer}</Text>
@@ -153,13 +156,39 @@ export default class Exercises extends Component {
   }
 }
 styles = StyleSheet.create({
+  card1: {
+
+  },
+  quest: {
+    width: 50+'%'
+  },
   input: {
     backgroundColor: 'rgba(255,255,255,1)',
     height: 50,
+     width: 30+'%',
     textAlign: 'center',
     color: '#7f8c8d',
     fontSize: 20,
     borderRadius: 6,
    
 },
+header: {
+  display: 'flex',
+  flexDirection: 'row',
+  justifyContent: 'center',
+  alignItems: 'center'
+},
+headerText: {
+  fontSize: 20,
+  alignSelf: 'center',
+  color: '#fff'
+}, 
+body: {
+  display: 'flex',
+  flexDirection: 'row',
+  width: 100+'%',
+  flexWrap: 'wrap',
+  // justifyContent: 'space-between',
+  width: 100+ '%'
+}
 })

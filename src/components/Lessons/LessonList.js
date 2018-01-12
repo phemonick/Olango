@@ -1,11 +1,20 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Text, FlatList, ScrollView, TouchableOpacity } from 'react-native';
-
+// import db from '../../db/${select}/A1'
+// let select = ''
 export default class LessonList extends Component {
     
-
+ async data(num){
+    const language = this.props.language
+    let response = await import (`../../db/french/A1/exercise1`)
+    let item = await response.exercises;
+    console.log(item)
+    return(
+    this.props.navigate('Exercises', {exercise: item, language:this.props.language} )
+    )
+ }
     render(){
-    
+        
         return(
             
             <View>
@@ -30,7 +39,9 @@ export default class LessonList extends Component {
                         <TouchableOpacity onPress={()=> this.props.navigate('Screen', {video: item.video} ) } style = {[styles.video]} >
                             <Text style = {styles.text2}>Watch Video </Text>
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={()=> this.props.navigate('Exercises', {exercise: item} ) } style = {[styles.test]} >
+                        {/* {this.data.bind(this, item.lesson)}  */}
+                        {/* ()=> this.props.navigate('Exercises', {exercise: item} ) */}
+                        <TouchableOpacity onPress={this.data.bind(this, item.lesson,) } style = {[styles.test]} >
                             <Text style = {styles.text2}>Take text </Text>
                         </TouchableOpacity>
                         
