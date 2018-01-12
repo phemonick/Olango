@@ -1,0 +1,34 @@
+{
+	"exercises":[
+		{
+		"question":1,
+		"exercise":"What do you want ?",
+		"answer":"Que désirez-vous",
+		"subquestion":"Vous?"
+		},
+		{
+		"question":2,
+		"exercise":"I would like to have tea!",
+		"answer":"Je voudrais",
+		"subquestion":"S’il vous plaît du thé.  "
+		},
+		{
+		"question":3,
+		"exercise":"Alright!",
+		"answer":"D’accord",
+		"subquestion":"!"
+		},
+		{
+		"question":4,
+		"exercise":"Thank you!",
+		"answer":"Merci",
+		"subquestion":"!"
+		},
+		{
+		"question":5,
+		"exercise":"Don’t mention.",
+		"answer":"Je vous en prie!",
+		"subquestion":"!"
+		}
+	]
+}

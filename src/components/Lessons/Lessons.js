@@ -1,14 +1,33 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-
+import LessonList from './LessonList'
 
 export default class Lessons extends Component{
 
+    componentDidMount(){
+        this.beginnerData();
+    }
+
+   async beginnerData(){
+    try{
+        const { params } = this.props.navigation.state
+        console.log(params.name)
+        let response = await fetch(`https://olango-api.herokuapp.com/resources/${params.name}/beginner`);
+        let responseJson = await response.json();
+        console.log(responseJson)
+    }
+    catch(err){
+        console.log('error in fetch ' + err)
+    }
+    }
+
     render(){
+        const { navigate } = this.props.navigation;
+        const { params } = this.props.navigation.state
         return(
             <View style = {styles.container}>
                 <View style = {styles.content} >
-                 <TouchableOpacity style = {styles.beginers} > 
+                 <TouchableOpacity onPress = {()=> navigate('LessonScheme', {language: params.name}) }  style = {styles.beginers} > 
                      <Text style = {styles.text}> Beginers </Text>
                  </TouchableOpacity> 
                  <TouchableOpacity style = {styles.intermediate} > 
@@ -17,6 +36,7 @@ export default class Lessons extends Component{
                  <TouchableOpacity style = {styles.advanced} > 
                      <Text style = {styles.text}> Advanced </Text>
                  </TouchableOpacity> 
+                 <Text> {params.name} </Text>
                 </View>
             </View>
         )

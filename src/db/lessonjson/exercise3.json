@@ -1,0 +1,34 @@
+{
+	"exercises":[
+		{
+		"question":1,
+		"exercise":"Joy is a friend of Caroline",
+		"answer":"Joy est une  ",
+		"subquestion":"Amie de Caroline"
+		},
+		{
+		"question":2,
+		"exercise":"who is joy’s friend?",
+		"answer":"Qui est",
+		"subquestion":"l’amie de Joy?"
+		},
+		{
+		"question":4,
+		"exercise":"Who Is that ?",
+		"answer":".Qui",
+		"subquestion":"est- ce ?"
+		},
+		{
+		"question":5,
+		"exercise":"Paul’s friend is called Richard.",
+		"answer":"L’ami de Paul",
+		"subquestion":"S’appelle Richard. "
+		},
+		{
+		"question":6,
+		"exercise":"Richard’s friend is called joy.",
+		"answer":"L’amie de ",
+		"subquestion":"Richard s’appelle joy"
+		}
+	]
+}

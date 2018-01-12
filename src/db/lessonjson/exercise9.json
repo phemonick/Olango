@@ -1,0 +1,34 @@
+{
+	"exercises":[
+		{
+		"question":1,
+		"exercise":"We would like to pay please.",
+		"answer":"nous voulons  ",
+		"subquestion":"payer s’il vous plait."
+		},
+		{
+		"question":2,
+		"exercise":"How much is it in total?",
+		"answer":"combien ça coûte ",
+		"subquestion":"en tout?"
+		},
+		{
+		"question":3,
+		"exercise":"A pineapple jus and  two sausage.Un",
+		"answer":"jus d’ananas",
+		"subquestion":"et deux saucisses."
+		},
+		{
+		"question":4,
+		"exercise":"Can i pay with my credit card?",
+		"answer":"de crédit  ",
+		"subquestion":" Je peux payer avec ma carte "
+		},
+		{
+		"question":5,
+		"exercise":"Why not ?",
+		"answer":"pour quoi",
+		"subquestion":"Pas!"
+		}
+	]
+}

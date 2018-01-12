@@ -9,7 +9,9 @@ import Menu from './menu';
 import SignIn from './Social/signIn'
 import Screen from './VideoPlayer/Screen'
 import Lessons from './Lessons/Lessons'
-
+import LessonScheme from './Lessons/LessonScheme'
+import Exercises from './Lessons/Exercises'
+import Tutor from './Chat/Tutor/Chat'
 
 const myDrawer = DrawerNavigator({
     Home: { screen: Login,
@@ -38,10 +40,19 @@ const myDrawer = DrawerNavigator({
           },
     },
     Lessons: {
-        screen: Lessons,
+        screen: Lessons
+    },
+    LessonScheme: {
+        screen: LessonScheme,
         navigationOptions: {
-            
+
         }
+    },
+    Exercises: {
+        screen: Exercises
+    },
+    Tutor: {
+        screen: Tutor
     }
 },
 {

@@ -8,37 +8,37 @@ class HomeCard extends Component {
             <Container>
                 <Content style = {styles.cardContainer}>
                     <Card style = {styles.card} >
-                        <TouchableOpacity onPress={()=> this.props.navigate('Screen') } style = {styles.cardItem}>
+                        <TouchableOpacity onPress={()=> this.props.navigate('Lessons', {name: "french"} ) } style = {styles.cardItem}>
                         <CardItem style = {styles.french} >    
                             <Text style = {styles.cardText} > French </Text>
                         </CardItem>
                         </TouchableOpacity>
 
-                        <TouchableOpacity onPress={()=> this.props.navigate('Lessons') } style = {styles.cardItem}>
+                        <TouchableOpacity onPress={()=> this.props.navigate('Lessons', {name: "chinese"} ) } style = {styles.cardItem}>
                         <CardItem style = {styles.english}>
-                            <Text style = {styles.cardText} > English </Text>
+                            <Text style = {styles.cardText} > Chinese </Text>
                         </CardItem>
                         </TouchableOpacity>
 
-                        <TouchableOpacity style = {styles.cardItem}>
+                        <TouchableOpacity onPress={()=> this.props.navigate('Lessons', {name: "yoruba"} ) } style = {styles.cardItem}>
                         <CardItem style = {styles.deutch}>
-                            <Text style = {styles.cardText} > Deutch </Text>
+                            <Text style = {styles.cardText} > Yoruba </Text>
                         </CardItem>
                         </TouchableOpacity>
 
-                        <TouchableOpacity style = {styles.cardItem}>   
+                        <TouchableOpacity onPress={()=> this.props.navigate('Lessons', {name: "Igbo"} ) } style = {styles.cardItem}>   
                         <CardItem style = {styles.igbo}>
                             <Text style = {styles.cardText} > Igbo </Text>
                         </CardItem >
                         </TouchableOpacity>
 
-                        <TouchableOpacity style = {styles.cardItem}>
+                        <TouchableOpacity onPress={()=> this.props.navigate('Lessons', {name: "Hausa"} ) } style = {styles.cardItem}>
                         <CardItem style = {styles.yoruba}>
-                            <Text style = {styles.cardText} > Yoruba </Text>
+                            <Text style = {styles.cardText} > Hausa </Text>
                         </CardItem>
                         </TouchableOpacity>
 
-                        <TouchableOpacity style = {styles.cardItem}>
+                        <TouchableOpacity onPress={()=> this.props.navigate('Lessons', {name: "Spanish"} ) } style = {styles.cardItem}>
                         <CardItem style = {styles.spanish}>
                             <Text style = {styles.cardText} > Spanish </Text>
                         </CardItem>

@@ -23,6 +23,9 @@ export default class Menu extends Component {
                 <TouchableOpacity>
                     <Text style ={styles.menus}> Forum </Text>
                 </TouchableOpacity>
+                <TouchableOpacity onPress= {()=> navigate('Tutor')} >
+                    <Text style ={styles.menus}> Chat </Text>
+                </TouchableOpacity>
             </View>
             
         )

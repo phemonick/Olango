@@ -4,11 +4,11 @@ import VideoPlayer from './Videos'
 
 export default class Screen extends Component {
     render(){
-        
+        const { params } = this.props.navigation.state
         return(
             <View style = {styles.container}>
                 
-                    <VideoPlayer />
+                    <VideoPlayer video={params.video} />
                 
             </View>
         )

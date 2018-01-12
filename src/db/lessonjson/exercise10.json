@@ -1,0 +1,34 @@
+{
+	"exercises":[
+		{
+		"question":1,
+		"exercise":"Where are you? Your number is not reachable. ",
+		"answer":"Où es-tu ? ",
+		"subquestion":"? ton numéro ne passe pas"
+		},
+		{
+		"question":2,
+		"exercise":"She is calling Dupe  but she is not at home.",
+		"answer":"Elle appelle ",
+		"subquestion":"Modupe mais, elle n’est pas à la maison."
+		},
+		{
+		"question":3,
+		"exercise":"Please, is the Seat free? ",
+		"answer":"L’entrée  ",
+		"subquestion":"est-elle gratuite?"
+		},
+		{
+		"question":4,
+		"exercise":"He is going  to learn French. ",
+		"answer":". Il va apprendre   ",
+		"subquestion":"sa leçon de français."
+		},
+		{
+		"question":5,
+		"exercise":"Have you à text message from Janine.",
+		"answer":"message de Janine ?",
+		"subquestion":"As-tu un "
+		}
+	]
+}

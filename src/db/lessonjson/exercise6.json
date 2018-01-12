@@ -1,0 +1,34 @@
+{
+	"exercises":[
+		{
+		"question":1,
+		"exercise":"How do You do?",
+		"answer":"Comment",
+		"subquestion":"Allez-vous?"
+		},
+		{
+		"question":2,
+		"exercise":"Are they not yet there?",
+		"answer":". Ne sont",
+		"subquestion":"ils pas encore là?"
+		},
+		{
+		"question":3,
+		"exercise":"They will surely be there.",
+		"answer":"ils vont",
+		"subquestion":"Sûrement arrive."
+		},
+		{
+		"question":4,
+		"exercise":"Very well, thanks.",
+		"answer":"très bien",
+		"subquestion":", merci!"
+		},
+		{
+		"question":5,
+		"exercise":"Not yet late!",
+		"answer":"pas encore",
+		"subquestion":"tard!"
+		}
+	]
+}

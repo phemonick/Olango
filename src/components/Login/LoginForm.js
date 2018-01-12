@@ -77,7 +77,7 @@ async onLoginPressed(){
                
             })
         })
-        let res = await response.text()
+        let res = await response.json()
         console.log(res)
         if (res.status >=200 && response.status < 300){
             this.setState({error: ''});

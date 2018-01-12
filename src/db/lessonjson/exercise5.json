@@ -1,0 +1,34 @@
+{
+	"exercises":[
+		{
+		"question":1,
+		"exercise":"Excuse me, are you Mrs Peter?",
+		"answer":"Excusez- moi",
+		"subquestion":", êtes- vous Madame Peter?"
+		},
+		{
+		"question":2,
+		"exercise":"Good day , my name is Judith.",
+		"answer":"Bonjour!",
+		"subquestion":",mon nom c’est Judith."
+		},
+		{
+		"question":3,
+		"exercise":"I am called Denis. ",
+		"answer":". Moi c’est",
+		"subquestion":"Denis"
+		},
+		{
+		"question":4,
+		"exercise":"Sorry I have a wrong number.",
+		"answer":"Veuillez  m’excusez",
+		"subquestion":"j’ai confondu de numéro."
+		},
+		{
+		"question":5,
+		"exercise":"Bye. ",
+		"answer":"Au revoir.",
+		"subquestion":""
+		}
+	]
+}

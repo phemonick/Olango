@@ -1,0 +1,34 @@
+{
+	"exercises":[
+		{
+		"question":1,
+		"exercise":"What do you want to eat.",
+		"answer":"Que voulez",
+		"subquestion":"vous manger?"
+		},
+		{
+		"question":2,
+		"exercise":"coffee please !",
+		"answer":". du .3 j’apporte, la carte",
+		"subquestion":"café s’il vous plait!"
+		},
+		{
+		"question":3,
+		"exercise":"I am bringing the menu card and the drink right now.",
+		"answer":"sa pause",
+		"subquestion":"la  boisson et menu pour la suite."
+		},
+		{
+		"question":4,
+		"exercise":"The coffee is cold! Le café  ",
+		"answer":"est froid",
+		"subquestion":"!"
+		},
+		{
+		"question":5,
+		"exercise":" Would you like to drink something? voulez- vous ",
+		"answer":"boire quelque chose ?",
+		"subquestion":"voulez- vous?"
+		}
+	]
+}

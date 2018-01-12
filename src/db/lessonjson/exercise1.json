@@ -1,0 +1,37 @@
+{
+"exercises":[
+	{
+	"question":1,
+	"exercise" : "You learn French ?",
+	"answer":"Apprenez-vous.",
+	"subquestion":"Français"
+},
+{
+	"question":2,
+	"exercise" : "Today is  special",
+	"answer":"Aujourd’hui est",
+	"subquestion":"Special"
+},
+{
+	"question":3,
+	"exercise" : "You are learning French.",
+	"answer":"Vous apprenez",
+	"subquestion":"le Français"
+},
+{
+	"question":4,
+	"exercise" : "Good morning  and good luck",
+	"answer":"Bonjour",
+	"subquestion":"et bonne chance."
+},
+{
+	"question":5,
+	"exercise" : "Enjoy yourself",
+	"answer":"soyez ",
+	"subquestion":"attentif"
+}
+
+
+
+]
+}

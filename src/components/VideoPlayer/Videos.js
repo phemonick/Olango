@@ -6,7 +6,7 @@ export default class VideoMedia extends Component {
 
     render(){
         return(
-          <VideoPlayer source={{uri: "https://res.cloudinary.com/shopspreeng/video/upload/v1513296099/Olango/French/A1/LESSON_1.mp4", mainVer: 1, patchVer: 0}} // Looks for .mp4 file (background.mp4) in the given expansion version. 
+          <VideoPlayer source={{uri: this.props.video, mainVer: 1, patchVer: 0}} // Looks for .mp4 file (background.mp4) in the given expansion version. 
             navigator={ this.props.navigator }
             seekColor={ '#3498db' }             // fill/handle colour of the seekbar
             videoStyle={ {} }                // Style appended to <Video> component
