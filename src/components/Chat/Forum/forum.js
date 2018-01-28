@@ -1,13 +1,14 @@
 import React, {Component} from 'react';
 import { Text, View, StyleSheet } from 'react-native';
-import ChatBody from './ChatBody'
-export default class Chat extends Component{
+import ForumBody from './forumBody'
+
+export default class Forum extends Component{
 
     render(){
         return(
             <View style ={styles.container} >
-            <Text > hello am chat </Text>
-            <ChatBody />
+            <Text > hello am Forum </Text>
+            <ForumBody />
             </View>
         )
     }

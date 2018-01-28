@@ -8,7 +8,7 @@ class Login extends Component{
         return (
             <KeyboardAvoidingView style = {styles.container}>
             <View style = {styles.content} >
-                 <TouchableOpacity style= {styles.arrowLogo}>
+                 <TouchableOpacity  style= {styles.arrowLogo}>
                     <Image style = {styles.arrow} source = {require('../../images/arrow.png')} />
                 </TouchableOpacity>
                 <View style= {styles.logoContainer}>

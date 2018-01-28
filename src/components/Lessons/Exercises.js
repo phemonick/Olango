@@ -1,26 +1,7 @@
 import React, { Component } from 'react';
 import { TextInput, StyleSheet, TouchableOpacity } from 'react-native';
 import { Container, Button, Header, View, DeckSwiper, Card, CardItem, Thumbnail, Text, Left, Body, Icon } from 'native-base';
-const Examples = [
-  {
-    question: '1',
-    exercise: '	You learn French ?',
-    answers: 'Apprenez-vous',
-    subquestion: 'Français'
-  },
-  {
-    question: '2',
-    exercise: 'Today is  special ??',
-    answers: 'Apprenez-vous',
-    subquestion: 'Special'
-  },
-  {
-    question: '3',
-    exercise: 'You are learning French???',
-    answers: 'Apprenez-vous',
-    subquestion: 'le Français'
-  }
-];
+
 let score =0
 let result = [0]
 let question = 0
@@ -58,15 +39,18 @@ export default class Exercises extends Component {
     }else{
       result[question] = 0
       console.log(result)
+      this._deckSwiper._root.swipeRight()
     }
   }
 
   sum(){
+    const { navigate } = this.props.navigation;
     const reducer = (accumulator, currentValue) => accumulator + currentValue;
     let answer = result.reduce(reducer)
     console.log(answer)
+     alert(answer)
     return (
-      answer
+      navigate('LessonScheme')
     )
   }
 
@@ -94,7 +78,7 @@ export default class Exercises extends Component {
     // console.log(exercise)
 
     return (
-      <Container>
+      <Container style={styles.Container} >
         <Header style={styles.header}><Text style={styles.headerText}>{params.language} Exercises</Text></Header>
         <View>
           <DeckSwiper
@@ -103,36 +87,33 @@ export default class Exercises extends Component {
             renderItem={item =>
               <Card style={{ elevation: 3 }}>
                 <CardItem style = {styles.card1}>
-                  
-                    <Body style={styles.body} >
                       
-                        <Text style={styles.quest}>{item.exercise} ?</Text>
-                        <TextInput 
-                        onChangeText = {(text)=>{
-                          this.setState({
-                            status:text,
-                            answer: item.answers,
-          
-                          })
+                    <Text style={styles.quest}>{item.question}. {item.exercise}</Text>
+                    <View style={styles.body}>
+                      <TextInput 
+                      autoCorrect = {false}
+                      onChangeText = {(text)=>{
+                        this.setState({
+                          status:text,
+                          answer: item.answer})
                           question = item.question
-                        } }
-                        underlineColorAndroid='red'
-                        
-                          style = { styles.input }
-                        />
-                        <Text> {item.subquestion} </Text>
-                    </Body>
-
-                    <TouchableOpacity onPress={this.submitText.bind(this)} >
-                      <Text> Submit </Text>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity onPress={this.sum.bind(this)} >
-                      <Text> Finish </Text>
-                    </TouchableOpacity>
-                  
+                      } }
+                      placeholder ='Input Answer'
+                      underlineColorAndroid='transparent'
+                        style = { styles.input }
+                      />
+                      <Text style = { styles.subquestion }> {item.subquestion} </Text>
+                    </View>
                 </CardItem>
-                <CardItem >
+
+                <CardItem style = {styles.log} >
+                <TouchableOpacity style={styles.submit} onPress={this.submitText.bind(this)} >
+                      <Text style={styles.textApp}> Submit </Text>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity style={styles.finish} onPress={this.sum.bind(this)} >
+                      <Text style={styles.textApp}> Finish </Text>
+                    </TouchableOpacity>
                 </CardItem>
                 <CardItem>
                   <Text>{item.answer}</Text>
@@ -141,12 +122,12 @@ export default class Exercises extends Component {
             }
           />
         </View>
-        <View style={{ flexDirection: "row", flex: 1, position: "absolute", bottom: 50, left: 0, right: 0, justifyContent: 'space-between', padding: 15 }}>
-          <Button iconLeft onPress={() => this._deckSwiper._root.swipeLeft()}>
+        <View style={{ flexDirection: "row", flex: 1, position: "absolute", bottom: 70, left: 0, right: 0, justifyContent: 'space-between', padding: 15 }}>
+          <Button style={styles.button} iconLeft onPress={() => this._deckSwiper._root.swipeLeft()}>
             <Icon name="arrow-back" />
             <Text>Back</Text>
           </Button>
-          <Button iconRight onPress={() => this._deckSwiper._root.swipeRight()}>
+          <Button style={styles.button} iconRight onPress={() => this._deckSwiper._root.swipeRight()}>
             <Icon name="arrow-forward" />
             <Text>Next</Text>
           </Button>
@@ -156,20 +137,30 @@ export default class Exercises extends Component {
   }
 }
 styles = StyleSheet.create({
+  Container: {
+    backgroundColor: '#34495e',
+  },
   card1: {
-
+    display: 'flex',
+    flexDirection: 'column',
+    flexWrap: 'wrap'
   },
   quest: {
-    width: 50+'%'
+    // width: 50+'%'
+    fontSize: 20,
+    color: '#020E23'
   },
   input: {
     backgroundColor: 'rgba(255,255,255,1)',
-    height: 50,
-     width: 30+'%',
+    height: 30,
+    width: 70+'%',
     textAlign: 'center',
     color: '#7f8c8d',
     fontSize: 20,
+    borderWidth: 1,
+    padding: 0,
     borderRadius: 6,
+    borderColor: '#e67e22'
    
 },
 header: {
@@ -188,7 +179,35 @@ body: {
   flexDirection: 'row',
   width: 100+'%',
   flexWrap: 'wrap',
-  // justifyContent: 'space-between',
-  width: 100+ '%'
+ justifyContent: 'space-between',
+  width: 100+ '%',
+  marginTop: 20
+},
+subquestion: {
+  fontSize: 20
+},
+log:{
+  display: 'flex',
+  flexDirection: 'row',
+  justifyContent: 'space-around'
+},
+submit: {
+  backgroundColor: '#2ecc71',
+        borderRadius: 6,
+        paddingVertical: 5
+},
+finish: {
+  backgroundColor: '#3498db',
+        borderRadius: 6,
+        paddingVertical: 5
+},
+textApp: {
+  textAlign: 'center',
+  color: '#fff',
+  fontSize: 25,
+  fontWeight: 'bold'
+},
+button: {
+  padding: 10
 }
 })

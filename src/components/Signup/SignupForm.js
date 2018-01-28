@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet, TouchableOpacity, TextInput, Picker, KeyboardAvoidingView } from 'react-native'
+import { Text, View, StyleSheet, TouchableOpacity, TextInput, Picker, KeyboardAvoidingView, ScrollView } from 'react-native'
 
 
 class SignupForm extends Component {
@@ -9,8 +9,9 @@ class SignupForm extends Component {
         this.state = {
             email: '',
             name: '',
+            Lname: '',
             password: '',
-            password_confirmation: '',
+            confirmPassword: '',
            sex: '',
            language: '',
            errors: [],
@@ -19,35 +20,53 @@ class SignupForm extends Component {
 
   async onRegister(){
        try {
-        let response = await fetch('https://olango-api.herokuapp.com/auth/email/signup', {
+        let response = await fetch('https://chatapiendpoint.herokuapp.com/api/v1/user/signup', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                name: this.state.name,
+                fullname: this.state.name,
+                lastname: this.state.Lname,
                 email: this.state.email,
                 password: this.state.password,
+                confirmPassword: this.state.confirmPassword,
+                sex: this.state.sex,
+                lanuguageToLearn: this.state.language
             })
         })
-        let res = await response.text()
+        let res = await response.json()
         console.log(res)
-        if(res.status >=200 && res.status < 300) {
-            console.log('res success is: '+ res)
-        } else {
-            let errors = res;
-            throw errors;
+        if(res.errors){
+            console.log(res.errors)
+            this.setState({
+                errors: res.errors
+            })
+        }else {
+            this.setState({
+                errors: ''
+
+            })
+            this.props.navigate('Home')
         }
+        
        }
        catch(err){
-        console.log('catch errors :' + err)
+        this.setState({
+            errors: 'check internet connection'
+        })
        }
     }
 
     render() {
+        
         return(
+            
             <KeyboardAvoidingView  style = {styles.container} >
+            <ScrollView>
+                {this.state.errors.length == 0 ? (<Text> </Text>) :(<Text style ={ styles.err }> {this.state.errors[0].msg} </Text>) }
+                
                 <View style={styles.name}>
                 <TextInput 
                     onChangeText = { (text)=> this.setState({name: text}) }
@@ -60,7 +79,7 @@ class SignupForm extends Component {
                     onSubmitEditing = {() => this.passwordInput.focus()}
                  />
                  <TextInput 
-                    onChangeText = { (text)=> this.setState({name: text}) }
+                    onChangeText = { (text)=> this.setState({Lname: text}) }
                     style = {styles.fandLast}
                     underlineColorAndroid = 'transparent'
                     placeholder ='Last Name'
@@ -91,10 +110,10 @@ class SignupForm extends Component {
                     autoCorrect = {false}
                  />
                  <TextInput 
-                    onChangeText = { (text)=> this.setState({password: text}) }
+                    onChangeText = { (text)=> this.setState({confirmPassword: text}) }
                     style = {styles.input}
                     underlineColorAndroid = 'transparent'
-                    placeholder ='Confirm Password'
+                    placeholder ='confirm Password'
                     secureTextEntry
                     returnKeyType = 'next'
                     autoCapitalize = 'none'
@@ -105,7 +124,10 @@ class SignupForm extends Component {
                  <Picker
                     selectedValue={this.state.sex}
                     mode= "dropdown"
-                    onValueChange={(itemValue, itemIndex) => this.setState({sex: itemValue})}>
+                    onValueChange={(itemValue, itemIndex) =>{ 
+                        console.log(itemValue)
+                        this.setState({sex: itemValue})
+                        }}>
                     <Picker.Item label="sex" value="" />
                     <Picker.Item label="Male" value="Male" />
                     <Picker.Item label="Female" value="Female" />
@@ -129,7 +151,9 @@ class SignupForm extends Component {
                 <TouchableOpacity onPress={()=> this.props.navigate('Home')} style = {styles.exist} >
                     <Text style = {styles.existText}> I already have an account<Text style={styles.signIn}> SIGN IN </Text> </Text>
                 </TouchableOpacity>
+                </ScrollView>
             </KeyboardAvoidingView>
+            
         )
     }
 }
@@ -138,6 +162,10 @@ export default SignupForm;
 const styles = StyleSheet.create({
     container: {
         width: 100 + '%'
+    },
+    err: {
+        color: '#e74c3c',
+        textAlign: 'center'
     },
     name: {
         backgroundColor: 'rgba(255,255,255,1)',

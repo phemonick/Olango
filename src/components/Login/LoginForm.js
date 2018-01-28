@@ -31,7 +31,8 @@ passwordChange(text){
 }
 async storeToken(accesstoken){
     try {
-        await AsyncStorage.setItem(ACCESS_TOKEN, accesstoken)
+        await AsyncStorage.setItem('access_token', accesstoken)
+        this.getToken('access_token')
 
     }
     catch(error){
@@ -41,10 +42,10 @@ async storeToken(accesstoken){
 
 async getToken(accesstoken){
     try {
-     const value = await AsyncStorage.getItem(ACCESS_TOKEN)
-        // if (value !== null){
-        //     console.log(value)
-        // }
+     let value = await AsyncStorage.getItem('access_token')
+        if (value !== null){
+            console.log(value)
+        }
     }
     catch(error){
         console.log('error : ' + err)
@@ -62,9 +63,17 @@ async removeToken(accesstoken){
 }
 
 async onLoginPressed(){
+    if (this.state.email==='' && this.state.password === '' ){
+        this.setState({
+            error: 'invalid input'
+        })
+        return(
+            null
+        )
+    }
     try{
         console.log('password is'+ this.state.password)
-        let response = await fetch('https://olango-api.herokuapp.com/auth/email/login', {
+        let response = await fetch('https://chatapiendpoint.herokuapp.com/api/v1/user/login', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -78,23 +87,41 @@ async onLoginPressed(){
             })
         })
         let res = await response.json()
-        console.log(res)
-        if (res.status >=200 && response.status < 300){
-            this.setState({error: ''});
-            console.log(res)
-            // this.storeToken(accesToken);
-        } else {
-            let error = res;
-            console.log('There has been a problem with your fetch operation: ' + error);
-            throw error;
-        }      
+        console.log(res.message)
+        let payload = JSON.stringify(res)
+        console.log(payload)
+        if(res.message =='Failed.'){
+            console.log(res.message)
+            this.setState({
+                error: res.error
+            })
+        }
+            
+       else if(res.message == 'Success'){
+            this.setState({
+                error: ''
+            })
+            try {
+                
+                await AsyncStorage.setItem('@MySuperStore',payload).then((val)=>{
+                    console.log({"stored item error":val})
+                })
+                
+                
+              } catch (error) {
+                console.log('err', error)
+              }
+              this.props.navigate('Home')     
+        
+        }
     }
     catch(err){
         // this.removeToken()
         console.log('There has been a problem with your fetch operation: ' + err);
+        this.setState({error: "poor internet connection"})  
         throw err
         
-        this.setState({error: err})      
+            
         
 
     }
@@ -102,12 +129,13 @@ async onLoginPressed(){
 
     render() {
         return (
-            <KeyboardAvoidingView keyboardVerticalOffset={70} behavior='position' style = {styles.container} >
+            <KeyboardAvoidingView keyboardVerticalOffset={50} behavior='position' style = {styles.container} >
                 <StatusBar barStyle = 'light-content' />
                 <TextInput 
                     onChangeText = {this.emailChange.bind(this) }
                     style = {styles.input}
                     underlineColorAndroid = 'transparent'
+                    keyboardType = 'email-address'
                     placeholder ='Email'
                     returnKeyType = 'next'
                     autoCapitalize = 'none'
@@ -127,6 +155,7 @@ async onLoginPressed(){
                  <TouchableOpacity onPress={this.onLoginPressed.bind(this)} style = {styles.buttonContainer} >
                     <Text style = {styles.buttonText} > LOGIN </Text>
                 </TouchableOpacity>
+                <Text style = {styles.error}> {this.state.error} </Text>
                 <TouchableOpacity onPress={()=> this.props.navigate('SignUp')} style = {styles.signUp} >
                    <Text style = {styles.bottomText}> Don't have an account? SIGN UP </Text>
                 </TouchableOpacity> 
@@ -164,6 +193,10 @@ const styles = StyleSheet.create({
         color: '#fff',
         fontSize: 20,
         fontWeight: 'bold'
+    },
+    error: {
+        color: '#e74c3c',
+        textAlign: 'center'
     },
     signUp: {
         margin: 10,

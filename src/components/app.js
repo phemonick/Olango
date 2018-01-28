@@ -12,9 +12,18 @@ import Lessons from './Lessons/Lessons'
 import LessonScheme from './Lessons/LessonScheme'
 import Exercises from './Lessons/Exercises'
 import Tutor from './Chat/Tutor/Chat'
+import Pay from './Payment/Pay'
+import Forum from './Chat/Forum/forum'
+import User from './Chat/Home/Users'
+import Splash from './Splash'
 
 const myDrawer = DrawerNavigator({
-    Home: { screen: Login,
+    Home:  { screen: Home,
+        navigationOptions: {
+            header: null,
+          },
+    },
+    Login: { screen: Login,
         navigationOptions: {
             header: null,
           },
@@ -26,7 +35,7 @@ const myDrawer = DrawerNavigator({
     },
     Hom: { screen: Home,
         navigationOptions: {
-            header: null,
+             header: null,
           },
     },
     SignUp: { screen: SignUp,
@@ -40,12 +49,16 @@ const myDrawer = DrawerNavigator({
           },
     },
     Lessons: {
-        screen: Lessons
+        screen: Lessons,
+        navigationOptions:{
+            header: null
+        },
+        
     },
     LessonScheme: {
         screen: LessonScheme,
         navigationOptions: {
-
+            header: null
         }
     },
     Exercises: {
@@ -53,20 +66,32 @@ const myDrawer = DrawerNavigator({
     },
     Tutor: {
         screen: Tutor
+    },
+    Pay: {
+        screen: Pay
+    },
+    Forum: { screen: Forum,
+        navigationOptions: {
+             header: null,
+          }
+        },
+    User: {
+        screen: User
     }
 },
+
 {
     contentComponent: props => <Menu {...props} />
 }
 )
 
 const nativeShop = StackNavigator({
-    Home: { screen: Login,
+    Home:  { screen: Splash,
         navigationOptions: {
             header: null,
           },
     },
-    Hom: { screen: myDrawer,
+    Login: { screen: Login,
         navigationOptions: {
             header: null,
           },
@@ -76,9 +101,14 @@ const nativeShop = StackNavigator({
             header: null,
           },
     },
+    Draw: { screen: myDrawer,
+        navigationOptions: {
+             header: null,
+          },
+    },
     Screen: { screen: Screen,
         navigationOptions: {
-            header: null,
+            // header: null,
           },
         },
     SignIn: { screen: SignIn,

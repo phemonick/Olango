@@ -27,6 +27,7 @@
         </intent-filter>
       </activity>
       <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
+      <meta-data android:name="co.paystack.android.PublicKey" android:value="pk_test_05566fd5692587a7affa3ca94ee4c8e1b2c05025"/>
     </application>
 
 </manifest>

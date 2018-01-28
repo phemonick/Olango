@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { View, Text, Image, FlatList, StyleSheet, TouchableOpacity } from 'react-native';
 import LessonList from './LessonList'
+import * as Progress from 'react-native-progress';
+
 
 export default class LessonScheme extends Component{
 
@@ -11,7 +13,11 @@ export default class LessonScheme extends Component{
         }
     }
     componentDidMount(){
-        this.fetchData();
+        const { params } = this.props.navigation.state
+        // this.fetchData();
+        this.setState({
+           topic: params.topic
+        })
     }
     static navigationOptions = {
         title: 'contents'
@@ -43,6 +49,14 @@ export default class LessonScheme extends Component{
                         <Image style = {styles.logo} source = {require('../../images/olango.png')} />
                     </View>
                 </View>
+                 <View style ={styles.space} >
+                    <Text style = {styles.prog} >spanish 30% </Text>
+                    <Progress.Bar 
+                        progress = {0.3} 
+                        height = {30}
+                        color = {'#2ecc71'}  
+                    />
+                </View> 
                 <View style = {styles.lessons} >
                     <Text style = {styles.course}>Course : {params.language} </Text>
                     <LessonList language={params.language} navigate={navigate} name={this.state.topic} />
@@ -58,7 +72,7 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         backgroundColor: '#34495e',
         display: 'flex',
-        justifyContent: 'space-between',
+        justifyContent: 'space-around',
         alignItems: 'center',
         
     },
@@ -66,9 +80,12 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
-        width: 80+'%',
+        width: 70+'%',
         height: 20+'%',
-        marginTop: 10
+        marginTop: 20
+    },
+    space: {
+        
     },
     lessons: {
         height: 70+'%',

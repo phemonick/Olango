@@ -1,12 +1,45 @@
 import React, { Component } from 'react'
-import { StyleSheet, View, Image, Text, TouchableOpacity, KeyboardAvoidingView } from 'react-native'
+import { StyleSheet, View, Image,AsyncStorage, Text, TouchableOpacity, KeyboardAvoidingView } from 'react-native'
 
 class SignIn extends Component{
+    
+    constructor(){
+        super()
+        this.state = {
+            valid: false
+        }
+    }
+
 
    async linkFace(){
     }
-    render(){
 
+    async facebook(){
+        console.log('facebook')
+        try{
+            let response = await fetch('https://brents-url-olango.herokuapp.com/api/v1/auth/facebook')
+            let result = await response.json();
+            console.log(result)
+        }
+        catch(err){
+            console.log(err)
+        }
+    }
+
+    goHome(){
+        const { navigate } = this.props.navigation;
+        if(this.state.valid){
+
+            return (
+                navigate('Hom')
+            )
+        }else{
+            navigate('Login')
+        }
+
+    }
+    render(){
+        const { navigate } = this.props.navigation;
         return (
             <View style = {styles.container}>
                 <View style = {styles.content} >
@@ -18,10 +51,10 @@ class SignIn extends Component{
 
                     <View>
                         <View style = {styles.getStarted} >
-                            <TouchableOpacity onPress = {this.linkFace} style = {styles.createAccount}>
+                            <TouchableOpacity onPress = {()=>navigate('SignUp')} style = {styles.createAccount}>
                                 <Text style = {styles.media} > Create Account </Text>
                             </TouchableOpacity>
-                            <TouchableOpacity style = {styles.facebook}>
+                            <TouchableOpacity onPress={this.facebook.bind(this)} style = {styles.facebook}>
                                 <Text style = {styles.media}> Join with Facebook </Text>
                             </TouchableOpacity>
                             <TouchableOpacity style = {styles.google}>
@@ -32,7 +65,7 @@ class SignIn extends Component{
 
                     <View>
                         <Text style = {styles.media}> Already an OlangO member? </Text>
-                        <TouchableOpacity style = {styles.SignIn}>
+                        <TouchableOpacity onPress = {this.goHome.bind(this)} style = {styles.SignIn}>
                             <Text style = {styles.media}> Sign In </Text>
                         </TouchableOpacity>
                     </View>
