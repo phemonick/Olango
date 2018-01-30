@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import {View, StyleSheet, AsyncStorage} from 'react-native';
+import {View, StyleSheet, AsyncStorage, Image} from 'react-native';
+import { inject } from 'mobx-react'
 
+@inject("stores")
 export default class Splash extends Component {
 
     constructor(props){
@@ -44,18 +46,21 @@ export default class Splash extends Component {
     }
 
     componentDidMount(){
+        this.checkToken();
+        const {stores, navigation } = this.props;
         setTimeout(()=>{
             // Add your logic for the transition
             console.log(this.state.component)
-            this.props.navigation.navigate(this.state.component)
-       }, 5000)
+            navigation.navigate(this.state.component)
+       }, stores.config.SplashTime)
         
     }
 
     render(){
+        const { stores } = this.props
         return(
             <View style = {styles.container} >
-                
+                <Image source = {stores.config.SplashImg}  style = {styles.Img} />
             </View>
         )
     }
@@ -63,8 +68,14 @@ export default class Splash extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: '#34495e',
-        width: 100+ '%',
-        height: 100+ '%'
+        flex: 1
+        // backgroundColor: '#34495e',
+        // width: 100+ '%',
+        // height: 100+ '%'
+    },
+    img: {
+        flex: 1,
+        width: null,
+        height: null
     }
 })

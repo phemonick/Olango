@@ -1,7 +1,18 @@
 import React, { Component } from 'react';
-import { StyleSheet, TouchableOpacity } from 'react-native'
+import { StyleSheet, TouchableOpacity, AsyncStorage } from 'react-native'
 import { Container, Header, Content, Card, CardItem, Text } from 'native-base'
 class HomeCard extends Component {
+
+    clearToken(){
+        AsyncStorage.removeItem('@MySuperStore', (err, res)=>{
+            if(err){
+
+                console.log(err)
+                throw err
+            }
+            console.log('Successful')
+        })
+    }
 
     render(){
         return(
@@ -42,6 +53,9 @@ class HomeCard extends Component {
                         <CardItem style = {styles.spanish}>
                             <Text style = {styles.cardText} > Spanish </Text>
                         </CardItem>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={this.clearToken.bind(this)}>
+                            <Text> Clear Token </Text>
                         </TouchableOpacity>
 
                     </Card>

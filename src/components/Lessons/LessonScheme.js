@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { View, Text, Image, FlatList, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, Image, FlatList, StyleSheet, TouchableOpacity, StatusBar } from 'react-native';
 import LessonList from './LessonList'
+import { BackHandler } from 'react-native';
+import { NavigationActions } from 'react-navigation'
 import * as Progress from 'react-native-progress';
 
 
@@ -12,6 +14,19 @@ export default class LessonScheme extends Component{
             topic: []
         }
     }
+    componentWillMount() {
+        BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick);
+    }
+    componentWillUnmount() {
+        BackHandler.removeEventListener('hardwareBackPress', this.handleBackButtonClick);
+    }
+
+    handleBackButtonClick() {
+         this.props.navigation.goBack();
+        //  this.props.navigate('Lessons')
+        // return true;
+    }
+
     componentDidMount(){
         const { params } = this.props.navigation.state
         // this.fetchData();
@@ -43,6 +58,10 @@ export default class LessonScheme extends Component{
         console.log(params.language)
         return(
             <View style = {styles.container}>
+                <StatusBar  backgroundColor="rgba(0,0,0,0)"
+                    networkActivityIndicatorVisible={false}
+                    translucent={true}
+                    barStyle="light-content" />
                 <View style = {styles.content} >
                     
                     <View style= {styles.logoContainer}>

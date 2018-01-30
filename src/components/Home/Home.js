@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet, AsyncStorage, TouchableOpacity, Image, ProgressBarAndroid } from 'react-native';
+import { Text, View, StyleSheet, AsyncStorage, TouchableOpacity, Image, ProgressBarAndroid, StatusBar } from 'react-native';
 import HomeCard from './HomeCard';
 // import ProgressBarClassic from 'react-native-progress-bar-classic';
 // import ProgressBarClassic from 'react-native-horizontal-progress-bar'
@@ -38,10 +38,14 @@ class Home extends Component {
         console.log(this.props.navigation.state.key)
         return(
             <View style = {styles.container}>
+                <StatusBar  backgroundColor="rgba(0,0,0,0)"
+                    networkActivityIndicatorVisible={false}
+                    translucent={true}
+                    barStyle="light-content" />
                 <View style = {styles.top}>
                 <View style={styles.row}>
                     <TouchableOpacity onPress={()=>navigate('DrawerToggle')}  style= {styles.arrowLogo}>
-                        <Image style = {styles.arrow} source = {require('../../images/icons-10.png')} />
+                        <Image style = {styles.arrow} source = {require('../../images/icons-05.png')} />
                     </TouchableOpacity>
                     <View style= {styles.logoContainer}>
                         <Image style = {styles.logo} source = {require('../../images/olango.png')} />
@@ -85,7 +89,8 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#34495e',
         display: 'flex',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        paddingTop: 20
     },
     
     top: {

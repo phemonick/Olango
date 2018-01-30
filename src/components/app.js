@@ -16,9 +16,23 @@ import Pay from './Payment/Pay'
 import Forum from './Chat/Forum/forum'
 import User from './Chat/Home/Users'
 import Splash from './Splash'
+import EmailConfirm from './Signup/EmailConfirm'
 
-const myDrawer = DrawerNavigator({
-    Home:  { screen: Home,
+const RouteConfig = {
+    initialRoute: 'Splash',
+    
+        contentComponent: props => <Menu {...props} />
+    
+}
+
+const AppNavigator = DrawerNavigator({
+    Splash: {
+        screen: Splash,
+        navigationOptions: {
+            header: null,
+          },
+    },
+    Hom:  { screen: Home,
         navigationOptions: {
             header: null,
           },
@@ -33,10 +47,8 @@ const myDrawer = DrawerNavigator({
         header: null,
         },
     },
-    Hom: { screen: Home,
-        navigationOptions: {
-             header: null,
-          },
+    Draw: {
+        screen: Home
     },
     SignUp: { screen: SignUp,
         navigationOptions: {
@@ -79,14 +91,11 @@ const myDrawer = DrawerNavigator({
         screen: User
     }
 },
-
-{
-    contentComponent: props => <Menu {...props} />
-}
+RouteConfig
 )
 
-const nativeShop = StackNavigator({
-    Home:  { screen: Splash,
+const myDrawer = StackNavigator({
+    initialRoute:  { screen: Splash,
         navigationOptions: {
             header: null,
           },
@@ -101,7 +110,10 @@ const nativeShop = StackNavigator({
             header: null,
           },
     },
-    Draw: { screen: myDrawer,
+    EmailConfirm: {
+        screen: EmailConfirm
+    },
+    Draw: { screen: Home,
         navigationOptions: {
              header: null,
           },
@@ -126,4 +138,4 @@ const nativeShop = StackNavigator({
     
 });
 
-export default nativeShop;
+export default AppNavigator;

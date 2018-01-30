@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import RNPaystack, {chargeCard} from 'react-native-paystack';
+// import RNPaystack, {chargeCard} from 'react-native-paystack';
 import { View, Text, StyleSheet, TouchableOpacity, TextInput } from 'react-native';
 
 export default class PayForm extends Component {

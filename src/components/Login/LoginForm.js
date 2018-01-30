@@ -1,13 +1,21 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, TextInput, TouchableOpacity, AsyncStorage, Text,KeyboardAvoidingView, StatusBar } from 'react-native';
-
+//  watches observables
+import { observer } from 'mobx-react/native'
+// when observable changes it re-renders
+import { observable } from 'mobx'
 //for asyncStorage, global to the app
 const ACCESS_TOKEN = 'access_token';
 
+@observer
+
 class LoginForm extends Component {
 
-constructor(){
-    super()
+    @observable email = '';
+    @observable password = '';
+
+constructor(props){
+    super(props)
 
     this.state = {
         email: '',
@@ -15,6 +23,13 @@ constructor(){
         error: ''
     }
 }
+
+signIn() {
+    const { auth } = this.props.stores
+    const { navigate } = this.props
+    auth.signIn({email: this.state.email, password: this.state.password})
+}
+
 emailChange(text){
     this.setState({
         email: text
@@ -128,6 +143,7 @@ async onLoginPressed(){
 }
 
     render() {
+        const { auth } = this.props.stores
         return (
             <KeyboardAvoidingView keyboardVerticalOffset={50} behavior='position' style = {styles.container} >
                 <StatusBar barStyle = 'light-content' />
@@ -152,7 +168,7 @@ async onLoginPressed(){
                  style = {styles.input}
 
                  />
-                 <TouchableOpacity onPress={this.onLoginPressed.bind(this)} style = {styles.buttonContainer} >
+                 <TouchableOpacity onPress={this.signIn.bind(this)} style = {styles.buttonContainer} >
                     <Text style = {styles.buttonText} > LOGIN </Text>
                 </TouchableOpacity>
                 <Text style = {styles.error}> {this.state.error} </Text>

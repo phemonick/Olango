@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { StyleSheet, View, Image,AsyncStorage, Text, TouchableOpacity, KeyboardAvoidingView } from 'react-native'
+import { StyleSheet, View, Image,AsyncStorage, Text, TouchableOpacity, KeyboardAvoidingView, StatusBar } from 'react-native'
 
 class SignIn extends Component{
     
@@ -42,6 +42,10 @@ class SignIn extends Component{
         const { navigate } = this.props.navigation;
         return (
             <View style = {styles.container}>
+                <StatusBar  backgroundColor="rgba(0,0,0,0)"
+                networkActivityIndicatorVisible={false}
+                translucent={true}
+                barStyle="light-content" />
                 <View style = {styles.content} >
 
                     <View style= {styles.logoContainer}>

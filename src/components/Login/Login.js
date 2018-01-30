@@ -1,12 +1,20 @@
 import React, { Component } from 'react'
-import { StyleSheet, View, Image, Text, TouchableOpacity, KeyboardAvoidingView } from 'react-native'
+import { StyleSheet, View, Image, Text, TouchableOpacity, StatusBar, KeyboardAvoidingView } from 'react-native'
 import LoginForm from './LoginForm'
+import { inject } from 'mobx-react'
+
+@inject("stores")
 class Login extends Component{
     render(){
         const { navigate } = this.props.navigation;
-
+        const {stores} = this.props
         return (
             <KeyboardAvoidingView style = {styles.container}>
+            
+            <StatusBar  backgroundColor="rgba(0,0,0,0)"
+                networkActivityIndicatorVisible={false}
+                translucent={true}
+                barStyle="light-content" />
             <View style = {styles.content} >
                  <TouchableOpacity  style= {styles.arrowLogo}>
                     <Image style = {styles.arrow} source = {require('../../images/arrow.png')} />
@@ -16,7 +24,7 @@ class Login extends Component{
                     <Text style = {styles.logoText}>The global world of language</Text>
                 </View>
                 <View style = {styles.formContainer} >
-                    <LoginForm navigate = {navigate} />
+                    <LoginForm {...this.props} />
                 </View>
             </View>
             </KeyboardAvoidingView>

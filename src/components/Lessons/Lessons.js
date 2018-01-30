@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text,Alert, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text,Alert, StyleSheet, TouchableOpacity, StatusBar } from 'react-native';
 import { NavigationActions } from 'react-navigation'
 import { BackHandler } from 'react-native';
 
@@ -60,13 +60,13 @@ export default class Lessons extends Component{
         console.log(responseJson)   
         // let res = await response.json()
 
-        if(responseJson.login){
-            console.log(responseJson) 
-            //remove token
+        // if(responseJson.login){
+        //     console.log(responseJson) 
+        //     //remove token
             
-               //navigate to login
-               navigate('Login')
-        }
+        //        //navigate to login
+        //        navigate('Login')
+        // }
         this.setState({topic: responseJson})
     }
     catch(err){
@@ -80,6 +80,10 @@ export default class Lessons extends Component{
         // this.props.navigation.dispatch(backAction)
         return(
             <View style = {styles.container}>
+                <StatusBar  backgroundColor="rgba(0,0,0,0)"
+                    networkActivityIndicatorVisible={false}
+                    translucent={true}
+                    barStyle="light-content" />
                 <View style = {styles.content} >
                 <Text style ={styles.topT} > {params.name.toUpperCase()} </Text>
                  <TouchableOpacity onPress = {this.next.bind(this) }  style = {styles.beginers} > 
