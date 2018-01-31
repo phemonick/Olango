@@ -2,11 +2,13 @@ import { observable, action } from 'mobx';
 import { AsyncStorage } from 'react-native'
 
 export default class AuthStore {
-    @observable authUser = null;
+    @observable error ;
+    @observable authUser
 
     constructor() {
 
         this.error = ''
+        this.authUser=''
     }
     @action
    async signIn({email, password}) {
@@ -36,10 +38,15 @@ export default class AuthStore {
             let res = await response.json()
             console.log(res.message)
             let payload = JSON.stringify(res)
-            console.log(payload)
+            console.log({data: payload})
             if(res.message =='Login Errors'){
                 console.log(res.errors[0].msg)               
                 this.error = res.errors[0].msg
+            }
+
+            else if(res.message == 'Failed.') {
+                console.log(res)
+                this.error = res.error
             }
                 
            else if(res.message == 'Success'){
@@ -51,26 +58,30 @@ export default class AuthStore {
                     await AsyncStorage.setItem('@MySuperStore',payload).then((val)=>{
                         if(val){
                             console.log({"stored item error":val})
-                            this.authUser = payload
+                            
                         }
                         else{
                             console.log({SUCCESS: payload})
+                            this.authUser = payload
                         }
+                    })
+                    return Promise.resolve({
+                        message: "Success",
+                        payload: this.authUser
                     })
                     
                     
                   } catch (error) {
                     console.log('err', error)
                   }
-                //   this.props.navigate('Home')     
+                  this.props.navigation.navigate('Hom')     
             
             }
         }
         catch(err){
             // this.removeToken()
             console.log('There has been a problem with your fetch operation: ' + err);
-            this.setState({error: "poor internet connection"})  
-            throw err
+            this.error='poor internet connection'
             
                 
             

@@ -11,8 +11,9 @@ const ACCESS_TOKEN = 'access_token';
 
 class LoginForm extends Component {
 
-    @observable email = '';
-    @observable password = '';
+    @observable email ;
+    @observable password ;
+    @observable error 
 
 constructor(props){
     super(props)
@@ -27,7 +28,12 @@ constructor(props){
 signIn() {
     const { auth } = this.props.stores
     const { navigate } = this.props
-    auth.signIn({email: this.state.email, password: this.state.password})
+    auth.signIn({email: this.state.email, password: this.state.password}).then((auth)=>{
+        if(auth.message == "Success"){
+            console.log({authmessage: auth.payload})
+            this.props.navigation.navigate('Hom')
+        }
+    })
 }
 
 emailChange(text){
@@ -171,7 +177,7 @@ async onLoginPressed(){
                  <TouchableOpacity onPress={this.signIn.bind(this)} style = {styles.buttonContainer} >
                     <Text style = {styles.buttonText} > LOGIN </Text>
                 </TouchableOpacity>
-                <Text style = {styles.error}> {this.state.error} </Text>
+                <Text style = {styles.error}> {auth.error} </Text>
                 <TouchableOpacity onPress={()=> this.props.navigate('SignUp')} style = {styles.signUp} >
                    <Text style = {styles.bottomText}> Don't have an account? SIGN UP </Text>
                 </TouchableOpacity> 

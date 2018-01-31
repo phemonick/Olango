@@ -8,7 +8,7 @@ export default class ChatBody extends Component {
   constructor(props){
     
     super(props);
-    this.socket = io.connect('https://olango-api.herokuapp.com', {
+    this.socket = io.connect('https://chatapiendpoint.herokuapp.com/chats', {
       transports: ['websocket']// you need to explicitly tell it to use websockets
     })
     console.ignoredYellowBox = [

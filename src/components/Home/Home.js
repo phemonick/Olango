@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
+import { inject } from 'mobx-react'
 import { Text, View, StyleSheet, AsyncStorage, TouchableOpacity, Image, ProgressBarAndroid, StatusBar } from 'react-native';
 import HomeCard from './HomeCard';
 // import ProgressBarClassic from 'react-native-progress-bar-classic';
 // import ProgressBarClassic from 'react-native-horizontal-progress-bar'
 import * as Progress from 'react-native-progress';
 
+@inject("stores")
 class Home extends Component {
 
     componentWillMount(){
+        console.log({storeesToken: this.props.stores.auth.authUser})
         this.getEM()
     }
 
@@ -34,6 +37,7 @@ class Home extends Component {
     }
 
     render(){
+        const {stores} = this.props
         const { navigate } = this.props.navigation;
         console.log(this.props.navigation.state.key)
         return(
@@ -76,7 +80,7 @@ class Home extends Component {
                 </View>
                 <View style = {styles.card} > 
                     <Text style = {styles.learn} > Learn a Language </Text>
-                    <HomeCard navigate = {navigate}/>
+                    <HomeCard {...this.props}/>
                 </View>
             </View>
 
