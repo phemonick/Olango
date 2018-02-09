@@ -37,7 +37,7 @@ signIn() {
 }
 
 emailChange(text){
-    this.setState({
+    this.setState({ 
         email: text
     })
     console.log(this.state.email)
@@ -178,10 +178,10 @@ async onLoginPressed(){
                     <Text style = {styles.buttonText} > LOGIN </Text>
                 </TouchableOpacity>
                 <Text style = {styles.error}> {auth.error} </Text>
-                <TouchableOpacity onPress={()=> this.props.navigate('SignUp')} style = {styles.signUp} >
+                <TouchableOpacity onPress={()=> this.props.navigation.navigate('SignUp')} style = {styles.signUp} >
                    <Text style = {styles.bottomText}> Don't have an account? SIGN UP </Text>
                 </TouchableOpacity> 
-                <TouchableOpacity style = {styles.signUp} onPress={()=> this.props.navigate('Hom')} > 
+                <TouchableOpacity style = {styles.signUp} onPress={()=> this.props.navigation.navigate('Hom')} > 
                    <Text style = {styles.bottomText} > Forgot your password </Text>
                 </TouchableOpacity>
             </KeyboardAvoidingView>
@@ -189,7 +189,7 @@ async onLoginPressed(){
     }
 }
 export default LoginForm;
-
+ 
 const styles = StyleSheet.create({
     container: {
 

@@ -33,7 +33,7 @@ class SignupForm extends Component {
                 password: this.state.password,
                 confirmPassword: this.state.confirmPassword,
                 sex: this.state.sex,
-                lanuguageToLearn: this.state.language
+                lanuguage: this.state.language
             })
         })
         let res = await response.json()
@@ -138,7 +138,10 @@ class SignupForm extends Component {
                 <Picker
                     mode= "dropdown"
                     selectedValue={this.state.language}
-                    onValueChange={(itemValue, itemIndex) => this.setState({language: itemValue})}>
+                    onValueChange={(itemValue, itemIndex) =>{ 
+                        console.log(itemValue)
+                        this.setState({language: itemValue})
+                        }}>
                     <Picker.Item label="language"  />
                     <Picker.Item label="French" value="French" />
                     <Picker.Item label="Spanish" value="Spanish" />

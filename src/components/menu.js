@@ -98,8 +98,8 @@ export default class Menu extends Component {
                 <TouchableOpacity>
                     <Text style ={styles.menus} onPress= {()=> navigate('Forum')}> Forum </Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress= {()=> navigate('User')} >
-                    <Text style ={styles.menus}> Chat </Text>
+                <TouchableOpacity onPress= {()=> navigate('Tutor')} >
+                    <Text style ={styles.menus}> Chat </Text> 
                 </TouchableOpacity>
                 <TouchableOpacity onPress= {()=> navigate('Pay')} >
                     <Text style ={styles.menus}> Payment </Text>

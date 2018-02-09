@@ -8,18 +8,23 @@
   },
   "dependencies": {
     "axios": "^0.17.1",
+    "eslint-plugin-react-native": "^3.2.1",
     "mobx": "^3.4.1",
     "mobx-react": "^4.3.5",
     "native-base": "^2.3.5",
     "react": "16.0.0",
+    "react-addons-update": "^15.6.2",
     "react-native": "0.50.4",
+    "react-native-background-timer": "^2.0.0",
     "react-native-gifted-chat": "^0.3.0",
     "react-native-horizontal-progress-bar": "^1.0.0",
+    "react-native-loading-spinner-overlay": "^0.5.2",
     "react-native-progress": "^3.4.0",
     "react-native-progress-bar-classic": "^1.2.1",
     "react-native-socket.io-client": "^1.4.8",
     "react-native-video": "^2.0.0",
     "react-native-video-controls": "^2.0.1",
+    "react-native-voximplant": "^0.1.7",
     "react-native-youtube": "^1.0.1",
     "react-navigation": "^1.0.0-beta.21",
     "react-redux": "^5.0.6",
@@ -31,10 +36,26 @@
     "babel-jest": "21.2.0",
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
     "babel-preset-react-native": "4.0.0",
+    "eslint": "^4.17.0",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.8.0",
     "jest": "21.2.1",
     "react-test-renderer": "16.0.0"
   },
   "jest": {
     "preset": "react-native"
-  }
+  },
+  "description": "",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/phemonick/Olango.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/phemonick/Olango/issues"
+  },
+  "homepage": "https://github.com/phemonick/Olango#readme"
 }

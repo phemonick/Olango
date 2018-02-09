@@ -1,89 +1,63 @@
 import React, { Component } from 'react';
-import { View, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, TouchableOpacity, StyleSheet, FlatList } from 'react-native';
 import { Thumbnail, Left, Right, Body, Text, List, ListItem  } from 'native-base';
+import { inject } from 'mobx-react'
+import { observer } from 'mobx-react/native'
+import { observable } from 'mobx'
 
+@inject("stores")
 export default class User extends Component{
+     
+    
 
+    constructor(props){
+        super(props)
+        
+    }
+    componentWillMount(){
+        this.getChats()
+    }
+
+    getChats(){
+        const { users } = this.props.stores
+        let {token} = this.props.stores.config.Token
+        console.log(token)
+        users.getChats(token)
+    }
+
+    
 
 
     render(){
         const { navigate } = this.props.navigation;
+        const { users } = this.props.stores
+        
         return(
             <View style ={styles.container}> 
-                
-                    <List style ={styles.body} >
-                        <ListItem avatar style = {styles.list}>
-                            <Left>
-                                <Thumbnail source={require('./icons-24.png')} />
-                            </Left>
-                            <TouchableOpacity onPress={()=>navigate('Tutor') }  >
-                                <Body>
-                                    <Text>Kumar Pratik</Text>
-                                    <Text note>Chat with English tutor</Text>
-                                </Body>
-                            </TouchableOpacity>
-                            <Right>
-                                <Text note>3:43 pm</Text>
-                            </Right>
-                        </ListItem>
-                        <ListItem avatar style = {styles.list}>
-                            <Left>
-                                <Thumbnail source={require('./icons-24.png')} />
-                            </Left>
-                            <TouchableOpacity  >
-                                <Body>
-                                    <Text>French</Text>
-                                    <Text note>Chat with French tutor</Text>
-                                </Body>
-                            </TouchableOpacity>
-                            <Right>
-                                <Text note>3:43 pm</Text>
-                            </Right>
-                        </ListItem>
-                        <ListItem avatar style = {styles.list}>
-                            <Left>
-                                <Thumbnail source={require('./icons-24.png')} />
-                            </Left>
-                            <TouchableOpacity  >
-                                <Body>
-                                    <Text>Dr phemy</Text>
-                                    <Text note>Chat with Spanish tutor</Text>
-                                </Body>
-                            </TouchableOpacity>
-                            <Right>
-                                <Text note>3:43 pm</Text>
-                            </Right>
-                        </ListItem>
-                    </List>
-                    <ListItem avatar style = {styles.list}>
-                            <Left>
-                                <Thumbnail source={require('./icons-24.png')} />
-                            </Left>
-                            <TouchableOpacity  >
-                                <Body>
-                                    <Text>Dr Emeka</Text>
-                                    <Text note>Chat with igbo tutor</Text>
-                                </Body>
-                            </TouchableOpacity>
-                            <Right>
-                                <Text note>3:43 pm</Text>
-                            </Right>
-                        </ListItem>
-                        <ListItem avatar style = {styles.list}>
-                            <Left>
-                                <Thumbnail source={require('./icons-24.png')} />
-                            </Left>
-                            <TouchableOpacity  >
-                                <Body>
-                                    <Text>Dr Wale</Text>
-                                    <Text note>Chat with Yoruba tutor</Text>
-                                </Body>
-                            </TouchableOpacity>
-                            <Right>
-                                <Text note>3:43 pm</Text>
-                            </Right>
-                        </ListItem>
-                
+                <FlatList
+                    data = {users.UsersIn}
+                    keyExtractor={(x,i)=> i}  
+                    renderItem = { ({item})=> 
+                    
+                        
+                            <List style ={styles.body} >
+                                <ListItem avatar style = {styles.list}>
+                                    <Left>
+                                        <Thumbnail source={require('./icons-24.png')} />
+                                    </Left>
+                                    <TouchableOpacity onPress={()=>navigate('Tutor') }  >
+                                        <Body>
+                                            <Text>{item.user.name}</Text>
+                                            <Text note>Chat with English tutor</Text>
+                                        </Body>
+                                    </TouchableOpacity>
+                                    <Right>
+                                        <Text note>3:43 pm</Text>
+                                    </Right>
+                                </ListItem>
+                            </List>   
+                    }
+                 />
             </View>
         )
     }

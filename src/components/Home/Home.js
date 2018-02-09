@@ -10,12 +10,13 @@ import * as Progress from 'react-native-progress';
 class Home extends Component {
 
     componentWillMount(){
-        console.log({storeesToken: this.props.stores.auth.authUser})
+        // console.log({storeesToken: this.props.stores.auth.authUser})
         this.getEM()
     }
 
     componentDidMount(){
-       
+        console.log({storeesToken: this.props.stores.config.Token})
+
     }
     async getEM(){
         try {

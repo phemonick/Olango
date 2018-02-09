@@ -3,6 +3,7 @@ import { AsyncStorage } from 'react-native'
 export default class ConfigStore{
 
     constructor(){
+        this.getEM()
         this.splashTime = 5000
         this.splashImg = require('../../images/bgImg.jpg')
         this.token = ''
@@ -13,14 +14,15 @@ export default class ConfigStore{
             const value = await AsyncStorage.getItem('@MySuperStore');
             if (value !== null){
                 let data = JSON.parse(value)
-                console.log(JSON.parse(value));
-                console.log(data.user);
+                this.token = data
+                console.log(JSON.parse({authStore: value}));
+                
             }
             else{
-               
-              console.log('no token yet')
+                console.log('no token yet')
+              
               // We have data!!
-              this.props.navigation.navigate('SignIn')
+              
             }
           } catch (error) {
             // Error retrieving data
@@ -32,5 +34,8 @@ export default class ConfigStore{
     }
     get SplashTime() {
         return this.splashTime
+    }
+    get Token() {
+        return (this.token)
     }
 }

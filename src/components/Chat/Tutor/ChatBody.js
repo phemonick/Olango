@@ -8,12 +8,10 @@ export default class ChatBody extends Component {
   constructor(props){
     
     super(props);
-    this.socket = io.connect('https://chatapiendpoint.herokuapp.com/chats', {
+    this.socket = io.connect('https://chat.herokuapp.com', {
       transports: ['websocket']// you need to explicitly tell it to use websockets
     })
-    console.ignoredYellowBox = [
-      'Setting a timer'
-      ];
+    
   this.state = {
     messages: [],
     };

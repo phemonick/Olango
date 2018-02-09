@@ -22,7 +22,7 @@ export default class Lessons extends Component{
     }
 
     componentWillMount() {
-        BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick);
+        
     }
     componentWillUnmount() {
         BackHandler.removeEventListener('hardwareBackPress', this.handleBackButtonClick);
@@ -35,6 +35,7 @@ export default class Lessons extends Component{
     }
     
     componentDidMount(){
+        BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick);
         this.beginnerData();
     }
     next(){

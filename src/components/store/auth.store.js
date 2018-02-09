@@ -10,6 +10,12 @@ export default class AuthStore {
         this.error = ''
         this.authUser=''
     }
+    get authUsers(){
+        let storedata = JSON.parse(this.authUser) 
+        return ({
+            userInfo: storedata
+        })
+    }
     @action
    async signIn({email, password}) {
         // if(this.authUser) {
@@ -39,6 +45,7 @@ export default class AuthStore {
             console.log(res.message)
             let payload = JSON.stringify(res)
             console.log({data: payload})
+            
             if(res.message =='Login Errors'){
                 console.log(res.errors[0].msg)               
                 this.error = res.errors[0].msg
