@@ -51,6 +51,11 @@
 		F0DF6F0864A84B4C99C83758 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 668806048F8E4218898DA81F /* Zocial.ttf */; };
 		542F8D95D006468A9EF5288D /* libRCTYouTube.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F6741BBC1A041B3822318A5 /* libRCTYouTube.a */; };
 		83FEA8F137444B9E90D6B219 /* libRNBackgroundTimer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA4A46C2DCFE484D8BDFC6EA /* libRNBackgroundTimer.a */; };
+		360B751A574441A8AD744521 /* libVoxImplant.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EE555A4DDD0B4CADBE05A993 /* libVoxImplant.a */; };
+		E4B60ECA43FD4219A5DA0025 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EB1C4C9B10D4862ABB38E93 /* libc++.tbd */; };
+		863F37B4128543C99FCF1A58 /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2B03450DB8E4B6A925E9305 /* VideoToolbox.framework */; };
+		DA6FD3D2BE014604BF1E6A05 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45F73FB7689A4A13B9A04A8E /* GLKit.framework */; };
+		16C833B0263C4BABAC19AD21 /* libVoxImplantSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A9AC88A08ECA41DB9846CDB8 /* libVoxImplantSDK.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -296,6 +301,12 @@
 		2F6741BBC1A041B3822318A5 /* libRCTYouTube.a */ = {isa = PBXFileReference; name = "libRCTYouTube.a"; path = "libRCTYouTube.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 		BBB19A55750A4F66BE271A8D /* RNBackgroundTimer.xcodeproj */ = {isa = PBXFileReference; name = "RNBackgroundTimer.xcodeproj"; path = "../node_modules/react-native-background-timer/ios/RNBackgroundTimer.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		EA4A46C2DCFE484D8BDFC6EA /* libRNBackgroundTimer.a */ = {isa = PBXFileReference; name = "libRNBackgroundTimer.a"; path = "libRNBackgroundTimer.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		F1BA33CD311D46489094C5C4 /* VoxImplant.xcodeproj */ = {isa = PBXFileReference; name = "VoxImplant.xcodeproj"; path = "../node_modules/react-native-voximplant/ios/VoxImplant.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		EE555A4DDD0B4CADBE05A993 /* libVoxImplant.a */ = {isa = PBXFileReference; name = "libVoxImplant.a"; path = "libVoxImplant.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		3EB1C4C9B10D4862ABB38E93 /* libc++.tbd */ = {isa = PBXFileReference; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = sourcecode.text-based-dylib-definition; explicitFileType = undefined; includeInIndex = 0; };
+		C2B03450DB8E4B6A925E9305 /* VideoToolbox.framework */ = {isa = PBXFileReference; name = "VideoToolbox.framework"; path = "System/Library/Frameworks/VideoToolbox.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
+		45F73FB7689A4A13B9A04A8E /* GLKit.framework */ = {isa = PBXFileReference; name = "GLKit.framework"; path = "System/Library/Frameworks/GLKit.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
+		A9AC88A08ECA41DB9846CDB8 /* libVoxImplantSDK.a */ = {isa = PBXFileReference; name = "libVoxImplantSDK.a"; path = "C:/Users/TROGGEURBAN/Desktop/Olango/node_modules/react-native-voximplant/ios/VoxImplantSDK/lib/libVoxImplantSDK.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -327,6 +338,11 @@
 				6830C112CCB540B1BA8ED3D7 /* libRCTVideo.a in Frameworks */,
 				542F8D95D006468A9EF5288D /* libRCTYouTube.a in Frameworks */,
 				83FEA8F137444B9E90D6B219 /* libRNBackgroundTimer.a in Frameworks */,
+				360B751A574441A8AD744521 /* libVoxImplant.a in Frameworks */,
+				E4B60ECA43FD4219A5DA0025 /* libc++.tbd in Frameworks */,
+				863F37B4128543C99FCF1A58 /* VideoToolbox.framework in Frameworks */,
+				DA6FD3D2BE014604BF1E6A05 /* GLKit.framework in Frameworks */,
+				16C833B0263C4BABAC19AD21 /* libVoxImplantSDK.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -498,6 +514,7 @@
 				3FE7BB7A929D4627A5107B1E /* RCTVideo.xcodeproj */,
 				1BFF029B70544F9EB4A16773 /* RCTYouTube.xcodeproj */,
 				BBB19A55750A4F66BE271A8D /* RNBackgroundTimer.xcodeproj */,
+				F1BA33CD311D46489094C5C4 /* VoxImplant.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -519,6 +536,7 @@
 				00E356EF1AD99517003FC87E /* OlangoTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				257382A68D2C400893C8DD44 /* Resources */,
+				B7437E43062B4CCDA7BFE47E /* Frameworks */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -563,6 +581,17 @@
 			name = Resources;
 			sourceTree = "<group>";
 			path = "";
+		};
+		B7437E43062B4CCDA7BFE47E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3EB1C4C9B10D4862ABB38E93 /* libc++.tbd */,
+				C2B03450DB8E4B6A925E9305 /* VideoToolbox.framework */,
+				45F73FB7689A4A13B9A04A8E /* GLKit.framework */,
+			);
+			name = Frameworks;
+			path = "";
+			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
@@ -1079,12 +1108,15 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"C:/Users/TROGGEURBAN/Desktop/Olango/node_modules/react-native-voximplant/ios/VoxImplantSDK/lib\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\react-native-video\ios",
 					"$(SRCROOT)\..\node_modules\react-native-youtube/**",
 					"$(SRCROOT)\..\node_modules\react-native-background-timer\ios",
+					"$(SRCROOT)\..\node_modules\react-native-voximplant\ios/**",
 				);
 			};
 			name = Debug;
@@ -1106,12 +1138,15 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"C:/Users/TROGGEURBAN/Desktop/Olango/node_modules/react-native-voximplant/ios/VoxImplantSDK/lib\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\react-native-video\ios",
 					"$(SRCROOT)\..\node_modules\react-native-youtube/**",
 					"$(SRCROOT)\..\node_modules\react-native-background-timer\ios",
+					"$(SRCROOT)\..\node_modules\react-native-voximplant\ios/**",
 				);
 			};
 			name = Release;
@@ -1129,13 +1164,18 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_NAME = Olango;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				VERSIONING_SYSTEM = "apple-generic";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\react-native-video\ios",
 					"$(SRCROOT)\..\node_modules\react-native-youtube/**",
 					"$(SRCROOT)\..\node_modules\react-native-background-timer\ios",
+					"$(SRCROOT)\..\node_modules\react-native-voximplant\ios/**",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"C:/Users/TROGGEURBAN/Desktop/Olango/node_modules/react-native-voximplant/ios/VoxImplantSDK/lib\"",
 				);
 			};
 			name = Debug;
@@ -1152,13 +1192,18 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_NAME = Olango;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				VERSIONING_SYSTEM = "apple-generic";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\react-native-video\ios",
 					"$(SRCROOT)\..\node_modules\react-native-youtube/**",
 					"$(SRCROOT)\..\node_modules\react-native-background-timer\ios",
+					"$(SRCROOT)\..\node_modules\react-native-voximplant\ios/**",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"C:/Users/TROGGEURBAN/Desktop/Olango/node_modules/react-native-voximplant/ios/VoxImplantSDK/lib\"",
 				);
 			};
 			name = Release;
@@ -1189,12 +1234,15 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"C:/Users/TROGGEURBAN/Desktop/Olango/node_modules/react-native-voximplant/ios/VoxImplantSDK/lib\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\react-native-video\ios",
 					"$(SRCROOT)\..\node_modules\react-native-youtube/**",
 					"$(SRCROOT)\..\node_modules\react-native-background-timer\ios",
+					"$(SRCROOT)\..\node_modules\react-native-voximplant\ios/**",
 				);
 			};
 			name = Debug;
@@ -1225,12 +1273,15 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"C:/Users/TROGGEURBAN/Desktop/Olango/node_modules/react-native-voximplant/ios/VoxImplantSDK/lib\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\react-native-video\ios",
 					"$(SRCROOT)\..\node_modules\react-native-youtube/**",
 					"$(SRCROOT)\..\node_modules\react-native-background-timer\ios",
+					"$(SRCROOT)\..\node_modules\react-native-voximplant\ios/**",
 				);
 			};
 			name = Release;
@@ -1256,6 +1307,8 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"C:/Users/TROGGEURBAN/Desktop/Olango/node_modules/react-native-voximplant/ios/VoxImplantSDK/lib\"",
 				);
 			};
 			name = Debug;
@@ -1281,6 +1334,8 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"C:/Users/TROGGEURBAN/Desktop/Olango/node_modules/react-native-voximplant/ios/VoxImplantSDK/lib\"",
 				);
 			};
 			name = Release;

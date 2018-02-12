@@ -15,7 +15,7 @@ DeviceEventEmitter.addListener("LoginSuccessful", () => {
     console.log('Login successsful')
 } );
 DeviceEventEmitter.addListener("LoginFailed", () => {
-    console.log('login failed');
+    console.log('login faileded');
 } )
 
 export default class LoginPage extends Component {
@@ -60,7 +60,7 @@ export default class LoginPage extends Component {
         if ( !this.state.emailA) {
             return (
                 <View >
-                    <Login />
+                    <Login {...this.props}/>
                 </View>
             )
         }

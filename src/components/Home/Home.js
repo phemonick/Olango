@@ -48,36 +48,36 @@ class Home extends Component {
                     translucent={true}
                     barStyle="light-content" />
                 <View style = {styles.top}>
-                <View style={styles.row}>
-                    <TouchableOpacity onPress={()=>navigate('DrawerToggle')}  style= {styles.arrowLogo}>
-                        <Image style = {styles.arrow} source = {require('../../images/icons-05.png')} />
-                    </TouchableOpacity>
-                    <View style= {styles.logoContainer}>
-                        <Image style = {styles.logo} source = {require('../../images/olango.png')} />
+                    <View style={styles.row}>
+                        <TouchableOpacity onPress={()=>navigate('DrawerToggle')}  style= {styles.arrowLogo}>
+                            <Image style = {styles.arrow} source = {require('../../images/icons-05.png')} />
+                        </TouchableOpacity>
+                        <View style= {styles.logoContainer}>
+                            <Image style = {styles.logo} source = {require('../../images/olango.png')} />
+                        </View>
+                        <TouchableOpacity style= {styles.logoContainer}>
+                            <Image style = {styles.logo} source = {require('../../images/camera.png')}/>
+                        </TouchableOpacity>
                     </View>
-                    <TouchableOpacity style= {styles.logoContainer}>
-                        <Image style = {styles.logo} source = {require('../../images/camera.png')}/>
-                    </TouchableOpacity>
-                </View>
-                <View style ={styles.progress} >
-                <View style ={styles.space} >
-                    <Text style = {styles.prog} >spanish 30% </Text>
+                    <View style ={styles.progress} >
+                    <View style ={styles.space} >
+                        <Text style = {styles.prog} >spanish 30% </Text>
+                        <Progress.Bar 
+                            progress = {0.3} 
+                            height = {30}
+                            color = {'#2ecc71'}  
+                        />
+                    </View>
+                    <View style ={styles.space} >
+                    <Text style = {styles.prog} >French 50% </Text>
                     <Progress.Bar 
-                        progress = {0.3} 
+                        progress = {0.5} 
                         height = {30}
-                        color = {'#2ecc71'}  
+                        color = {'#2ecc71'}
+                        
                     />
-                </View>
-                <View style ={styles.space} >
-                <Text style = {styles.prog} >French 50% </Text>
-                <Progress.Bar 
-                    progress = {0.5} 
-                    height = {30}
-                    color = {'#2ecc71'}
-                    
-                />
-                </View>
-                </View>
+                    </View>
+                    </View>
                 </View>
                 <View style = {styles.card} > 
                     <Text style = {styles.learn} > Learn a Language </Text>
@@ -99,8 +99,10 @@ const styles = StyleSheet.create({
     },
     
     top: {
-        elevation: 5,
-        backgroundColor: '#34495e'
+        elevation: 7,
+        backgroundColor: '#34495e',
+        flex: 1
+
     },
     row: {
         display: 'flex',
@@ -130,8 +132,9 @@ const styles = StyleSheet.create({
         resizeMode: 'contain'
     },
     card: {
-        height: 70+ '%',
+        marginTop: 10,
         alignSelf: 'center',
+        flex: 2
 
     },
     space: {
@@ -146,10 +149,12 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     prog: {
-        color: '#fff'
+        color: '#fff',
+        textAlign: 'center'
     },
     learn: {
         color: '#fff',
+        fontSize: 24,
         textAlign: 'center'
     }
 }) 

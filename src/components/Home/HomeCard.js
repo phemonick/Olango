@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
-import { StyleSheet, TouchableOpacity, AsyncStorage } from 'react-native'
+import { StyleSheet, Button, Animated, TouchableOpacity, AsyncStorage } from 'react-native'
 import { Container, Header, Content, Card, CardItem, Text } from 'native-base'
 class HomeCard extends Component {
+
+    constructor(){
+        super();
+        this.animated = new Animated.Value(0);
+    }
 
     clearToken(){
         AsyncStorage.removeItem('@MySuperStore', (err, res)=>{
@@ -13,8 +18,34 @@ class HomeCard extends Component {
             console.log('Successful')
         })
     }
+    animate(){
+        //allows to happen every time clicked
+        this.animated.setValue(0)
+        Animated.timing(this.animated, {
+            toValue: 1,
+            duration: 2000
+        }).start();
+    }
 
     render(){
+        const opacity = this.animated.interpolate({
+            inputRange: [0, 1],
+            outputRange: [0, 1]
+        })
+        const translateX = this.animated.interpolate({
+            inputRange: [0, 1],
+            outputRange: [-500, 1]
+        })
+        const translateY = this.animated.interpolate({
+            inputRange: [0, 1],
+            outputRange: [-500, 1]
+        })
+        const scale = this.animated.interpolate({
+            inputRange: [0, 1],
+            outputRange: [50, 1]
+        })
+        const transform = [{translateX}, {translateY}, {scale}]
+        
         const {navigate} = this.props.navigation
         return(
             <Container>
@@ -22,7 +53,8 @@ class HomeCard extends Component {
                     <Card style = {styles.card} >
                         <TouchableOpacity onPress={()=> navigate('Lessons', {name: "french"} ) } style = {styles.cardItem}>
                         <CardItem style = {styles.french} >    
-                            <Text style = {styles.cardText} > French </Text>
+                           {/* //allows to add transforms */}
+                            <Animated.Text style = {[styles.cardText, {opacity, transform}]}  > French </Animated.Text>
                         </CardItem>
                         </TouchableOpacity>
 
@@ -58,6 +90,7 @@ class HomeCard extends Component {
                         <TouchableOpacity onPress={this.clearToken.bind(this)}>
                             <Text> Clear Token </Text>
                         </TouchableOpacity>
+                        <Button title='click me' onPress={()=>this.animate()} />
 
                     </Card>
                 </Content>

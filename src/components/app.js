@@ -18,6 +18,7 @@ import User from './Chat/Home/Users'
 import Splash from './Splash'
 import EmailConfirm from './Signup/EmailConfirm'
 import ChatLogin from './Chat'
+import ChatRegister from './Chat/Register'
 
 const RouteConfig = {
     initialRoute: 'Splash',
@@ -96,6 +97,12 @@ const AppNavigator = DrawerNavigator({
         },
     User: {
         screen: User
+    },
+    ChatRegister: {
+        screen: ChatRegister,
+        navigationOptions: {
+            header: null
+        }
     }
 },
 RouteConfig
