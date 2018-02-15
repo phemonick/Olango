@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Text, View, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import PayForm from './PayForm'
+import PayStac from './Paystack'
 
 export default class Pay extends Component {
 
@@ -13,8 +14,11 @@ export default class Pay extends Component {
                     <View style= {styles.logoContainer}>
                         <Image style = {styles.logo} source = {require('../../images/olango.png')} />
                     </View>
-                    <View>
-                        <PayForm />
+                    <View style= {styles.pay} >
+                        <PayStac />
+                    </View>
+                    <View style = {styles.bottom} >
+
                     </View>
                 </View>
             </View>
@@ -31,7 +35,8 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between'
     },
     content: {
-        display: 'flex',
+        flex: 1,
+        backgroundColor: 'blue'
     },
     logoContainer: {
         width: 100 + '%',
@@ -47,6 +52,14 @@ const styles = StyleSheet.create({
         height: 70+ '%',
         alignSelf: 'center',
 
+    },
+    pay: {
+        flex: 3,
+        backgroundColor: 'red'
+    },
+    bottom: {
+        flex: 1,
+        backgroundColor: 'yellow'
     },
     learn: {
         color: '#fff',

@@ -75,6 +75,17 @@ export default class Menu extends Component {
             // Error retrieving data
           }
     }
+   async clearToken(){
+        AsyncStorage.removeItem('@MySuperStore', (err, res)=>{
+            if(err){
+
+                console.log(err)
+                throw err
+            }
+            console.log('Successful')
+            this.props.navigation.navigate('SignIn')
+        })
+    }
     
     static navigationOptions = ((navigation) => {
         title: 'Side menu'
@@ -93,7 +104,7 @@ export default class Menu extends Component {
                     <Text style  ={styles.menus} onPress= {()=> navigate('Hom')}> Language Catalog </Text>
                 </TouchableOpacity>
                 <TouchableOpacity>
-                    <Text style ={styles.menus}> Completed Courses </Text>
+                    <Text style ={styles.menus} onPress= {()=> navigate('CompletedCourses')}> Completed Courses </Text> 
                 </TouchableOpacity>
                 <TouchableOpacity>
                     <Text style ={styles.menus} onPress= {()=> navigate('Forum')}> Forum </Text>
@@ -101,8 +112,11 @@ export default class Menu extends Component {
                 <TouchableOpacity onPress= {()=> navigate('Tutor')} >
                     <Text style ={styles.menus}> Chat </Text> 
                 </TouchableOpacity>
-                <TouchableOpacity onPress= {()=> navigate('ChatLogin')} >
+                <TouchableOpacity onPress= {()=> navigate('Pay')} >
                     <Text style ={styles.menus}> Payment </Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress= {this.clearToken.bind(this)} >
+                    <Text style ={styles.menus}> Logout </Text>
                 </TouchableOpacity>
             </View>
             

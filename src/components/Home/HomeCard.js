@@ -8,6 +8,10 @@ class HomeCard extends Component {
         this.animated = new Animated.Value(0);
     }
 
+    componentDidMount(){
+        this.animate()
+    }
+
     clearToken(){
         AsyncStorage.removeItem('@MySuperStore', (err, res)=>{
             if(err){
@@ -21,7 +25,7 @@ class HomeCard extends Component {
     animate(){
         //allows to happen every time clicked
         this.animated.setValue(0)
-        Animated.timing(this.animated, {
+        Animated.spring(this.animated, {
             toValue: 1,
             duration: 2000
         }).start();
@@ -42,9 +46,9 @@ class HomeCard extends Component {
         })
         const scale = this.animated.interpolate({
             inputRange: [0, 1],
-            outputRange: [50, 1]
+            outputRange: [30, 1]
         })
-        const transform = [{translateX}, {translateY}, {scale}]
+        const transform = [{scale}]
         
         const {navigate} = this.props.navigation
         return(
@@ -60,37 +64,35 @@ class HomeCard extends Component {
 
                         <TouchableOpacity onPress={()=> navigate('Lessons', {name: "chinese"} ) } style = {styles.cardItem}>
                         <CardItem style = {styles.english}>
-                            <Text style = {styles.cardText} > Chinese </Text>
+                            <Animated.Text style = {[styles.cardText, {opacity, transform}]} > Chinese </Animated.Text>
                         </CardItem>
                         </TouchableOpacity>
 
                         <TouchableOpacity onPress={()=> navigate('Lessons', {name: "yoruba"} ) } style = {styles.cardItem}>
                         <CardItem style = {styles.deutch}>
-                            <Text style = {styles.cardText} > Yoruba </Text>
+                            <Animated.Text style = {[styles.cardText, {opacity, transform}]} > Yoruba </Animated.Text>
                         </CardItem>
                         </TouchableOpacity>
 
                         <TouchableOpacity onPress={()=> navigate('Lessons', {name: "Igbo"} ) } style = {styles.cardItem}>   
                         <CardItem style = {styles.igbo}>
-                            <Text style = {styles.cardText} > Igbo </Text>
+                            <Animated.Text style = {[styles.cardText, {opacity, transform}]} > Igbo </Animated.Text>
                         </CardItem >
                         </TouchableOpacity>
 
                         <TouchableOpacity onPress={()=> navigate('Lessons', {name: "Hausa"} ) } style = {styles.cardItem}>
                         <CardItem style = {styles.yoruba}>
-                            <Text style = {styles.cardText} > Hausa </Text>
+                            <Animated.Text style = {[styles.cardText, {opacity, transform}]} > Hausa </Animated.Text>
                         </CardItem>
                         </TouchableOpacity>
 
                         <TouchableOpacity onPress={()=> navigate('Lessons', {name: "Spanish"} ) } style = {styles.cardItem}>
                         <CardItem style = {styles.spanish}>
-                            <Text style = {styles.cardText} > Spanish </Text>
+                            <Animated.Text style = {[styles.cardText, {opacity, transform}]} > Spanish </Animated.Text>
                         </CardItem>
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={this.clearToken.bind(this)}>
-                            <Text> Clear Token </Text>
-                        </TouchableOpacity>
-                        <Button title='click me' onPress={()=>this.animate()} />
+                        
+                        {/* <Button title='click me' onPress={()=>this.animate()} /> */}
 
                     </Card>
                 </Content>

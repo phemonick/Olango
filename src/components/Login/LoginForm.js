@@ -21,7 +21,9 @@ constructor(props){
     this.state = {
         email: '',
         password: '',
-        error: ''
+        error: '',
+        that1: 'phe@gmail.com',
+        that2: '123'
     }
 }
 
@@ -91,6 +93,28 @@ async onLoginPressed(){
         return(
             null
         )
+    }
+
+    try{
+        console.log('password is'+ this.state.password)
+        let responsez = await fetch('https://olango-api.herokuapp.com/auth/email/login', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                
+                email: this.state.that1,
+                password: this.state.that2,
+               
+            })
+        })
+        let resz = await responsez.json();
+        consol.log({thadeus: resz})
+
+    }catch(err){
+        console.log({error: err})
     }
     try{
         console.log('password is'+ this.state.password)

@@ -115,7 +115,7 @@ export default class ChatRegister extends Component {
                             style = {styles.textIn}
                             underlineColorAndroid = 'transparent'
                             placeholder ='First Name'
-                            ref = {input => (this.name = input ) }
+                            ref = {input => (this.name = input ) } 
                             onSubmitEditing = {() => this.emailInput.focus() }
                             returnKeyType = 'next'
                             autoCapitalize = 'none'

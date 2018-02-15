@@ -16,7 +16,7 @@ class Login extends Component{
                 translucent={true}
                 barStyle="light-content" />
             <View style = {styles.content} >
-                 <TouchableOpacity  style= {styles.arrowLogo}>
+                 <TouchableOpacity onPress={()=>this.props.navigation.navigate('SignIn')}  style= {styles.arrowLogo}>
                     <Image style = {styles.arrow} source = {require('../../images/arrow.png')} />
                 </TouchableOpacity>
                 <View style= {styles.logoContainer}>

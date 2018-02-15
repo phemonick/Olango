@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {View, StyleSheet, AsyncStorage, Image} from 'react-native';
+import {View, StyleSheet, AsyncStorage, Animated, Image,StatusBar, ActivityIndicator, Text} from 'react-native';
 import { inject } from 'mobx-react'
 
 @inject("stores")
@@ -7,6 +7,7 @@ export default class Splash extends Component {
 
     constructor(props){
         super(props);
+        this.animated = new Animated.Value(0);
         this.state={
             component: ''
         }
@@ -46,6 +47,7 @@ export default class Splash extends Component {
     }
 
     componentDidMount(){
+        this.animate()
         this.checkToken();
         const {stores, navigation } = this.props;
         setTimeout(()=>{
@@ -56,11 +58,43 @@ export default class Splash extends Component {
         
     }
 
+    animate(){
+        //allows to happen every time clicked
+        this.animated.setValue(0)
+        Animated.timing(this.animated, {
+            toValue: 1,
+            duration: 2000
+        }).start();
+    }
+
     render(){
+        const opacity = this.animated.interpolate({
+            inputRange: [0, 1],
+            outputRange: [0, 1]
+        })
+        const translateX = this.animated.interpolate({
+            inputRange: [0, 1],
+            outputRange: [-500, 1]
+        })
+        const translateY = this.animated.interpolate({
+            inputRange: [0, 1],
+            outputRange: [-500, 1]
+        })
+        const scale = this.animated.interpolate({
+            inputRange: [0, 1],
+            outputRange: [50, 1]
+        })
+        const transform = [{scale}]
         const { stores } = this.props
         return(
             <View style = {styles.container} >
-                <Image source = {stores.config.SplashImg}  style = {styles.Img} />
+                {/* <Image source = {stores.config.SplashImg}  style = {styles.Img} /> */}
+                <StatusBar  backgroundColor="rgba(0,0,0,0)"
+                    networkActivityIndicatorVisible={false}
+                    translucent={true}
+                    barStyle="light-content" />
+                <Animated.Text style = {[styles.txt, {opacity, transform}]} > Welcome to Olango </Animated.Text>
+                <ActivityIndicator size="large" color="#fff" />
             </View>
         )
     }
@@ -68,8 +102,10 @@ export default class Splash extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1
-        // backgroundColor: '#34495e',
+        flex: 1,
+        backgroundColor: '#34495e',
+        alignItems: 'center',
+        justifyContent: 'center'
         // width: 100+ '%',
         // height: 100+ '%'
     },
@@ -77,5 +113,9 @@ const styles = StyleSheet.create({
         flex: 1,
         width: null,
         height: null
+    },
+    txt: {
+        color: '#fff',
+        fontSize: 30
     }
 })

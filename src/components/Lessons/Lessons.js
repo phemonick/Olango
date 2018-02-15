@@ -93,9 +93,7 @@ export default class Lessons extends Component{
                  <TouchableOpacity style = {styles.intermediate} > 
                      <Text style = {styles.text}> Intermediate </Text>
                  </TouchableOpacity> 
-                 <TouchableOpacity style = {styles.advanced} > 
-                     <Text style = {styles.text}> Advanced </Text>
-                 </TouchableOpacity> 
+                 
                 </View>
             </View>
         )

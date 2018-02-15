@@ -1,16 +1,19 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Text, FlatList, ScrollView, Image ,TouchableOpacity } from 'react-native';
+import { View, StyleSheet, Text, FlatList, ScrollView, Image ,TouchableOpacity, AsyncStorage } from 'react-native';
 import * as french  from '../../db/french/A1/exercises';
 import {db} from '../../db'
 import { BackHandler } from 'react-native';
 
 // import db from '../../db/${select}/A1'
 // let select = ''
-
+let totalCount = 0
 export default class LessonList extends Component {
 
     constructor(){
         super();
+        this.state = {
+            totalVideo: ''
+        }
         this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
     }
 
@@ -26,86 +29,142 @@ export default class LessonList extends Component {
          this.props.navigate('Lessons')
         return true;
     }
-
-data(num){
-    const language = this.props.language    
-    const frenchExercises = [french.exercise1, french.exercise2]
-    const {hausa, igbo, spanish, yoruba} = db;
-    // console.log(hausa);
-    if (language=='french') {
-        frenchExercises.map((problems, loc) => {
-            if (num == loc+1) {
-                 
-                console.log(JSON.stringify(problems))
-                return(
-                     this.props.navigate('Exercises', {exercise: problems, language:this.props.language, number: num} )
-                     )
-            }
-        })
+    // componentWillReceiveProps(props){
+    //     this.calculateTotal()
+    // }
+    componentDidMount(){
+        console.log(this.state.totalVideo)
     }
-    else if(language == 'Hausa'){
-        console.log(hausa)
-        let position = `exercise${num}`.toString()
-        console.log(position)
-        for(let native in hausa ){
-           let str = hausa[native].toString();
-            
-            if(position == native ){
-                console.log(hausa[native])
-                return(
-                    this.props.navigate('Exercises', {exercise: hausa[native], language:this.props.language, number: num} )
-                      )
-            }
-        }
+    
+    
+    calculateTotal(){
         
+        let data = this.props.name
+        let value = 0
+        for(let i = 0; i < data.length; i++  ){
+            console.log(i)
+            value = i
+        }
+        totalCount = value
+        return value
     }
-    else if(language == 'Igbo'){
-        console.log(igbo)
-        let position = `exercise${num}`.toString()
-        console.log(position)
-        for(let native in igbo ){
-           let str = igbo[native].toString();
+
+
+    data(num){
+        const language = this.props.language    
+        const frenchExercises = [french.exercise1, french.exercise2]
+        const {hausa, igbo, spanish, yoruba} = db;
+        // console.log(hausa);
+        if (language=='french') {
+            frenchExercises.map((problems, loc) => {
+                if (num == loc+1) {
+                    
+                    console.log(JSON.stringify(problems))
+                    return(
+                        this.props.navigate('Exercises', {exercise: problems, language:this.props.language, number: num} )
+                        )
+                }
+            })
+        }
+        else if(language == 'Hausa'){
+            console.log(hausa)
+            let position = `exercise${num}`.toString()
+            console.log(position)
+            for(let native in hausa ){
+            let str = hausa[native].toString();
+                
+                if(position == native ){
+                    console.log(hausa[native])
+                    return(
+                        this.props.navigate('Exercises', {exercise: hausa[native], language:this.props.language, number: num} )
+                        )
+                }
+            }
             
-            if(position == native ){
-                console.log(igbo[native])
-                return(
-                    this.props.navigate('Exercises', {exercise: igbo[native], language:this.props.language, number: num} )
-                      )
+        }
+        else if(language == 'Igbo'){
+            console.log(igbo)
+            let position = `exercise${num}`.toString()
+            console.log(position)
+            for(let native in igbo ){
+            let str = igbo[native].toString();
+                
+                if(position == native ){
+                    console.log(igbo[native])
+                    return(
+                        this.props.navigate('Exercises', {exercise: igbo[native], language:this.props.language, number: num} )
+                        )
+                }
             }
         }
-    }
-    else if(language == 'Spanish'){
-        console.log(spanish)
-        let position = `exercise${num}`.toString()
-        console.log(position)
-        for(let native in spanish ){
+        else if(language == 'Spanish'){
+            console.log(spanish)
+            let position = `exercise${num}`.toString()
+            console.log(position)
+            for(let native in spanish ){
 
-            if(position == native ){
-                console.log(spanish[native])
-                return(
-                    this.props.navigate('Exercises', {exercise: spanish[native], language:this.props.language, number: num} )
-                      )
+                if(position == native ){
+                    console.log(spanish[native])
+                    return(
+                        this.props.navigate('Exercises', {exercise: spanish[native], language:this.props.language, number: num} )
+                        )
+                }
             }
         }
-    }
-    else if(language == 'yoruba'){
-        console.log(yoruba)
-        let position = `exercise${num}`.toString()
-        console.log(position)
-        for(let native in yoruba ){
+        else if(language == 'yoruba'){
+            console.log(yoruba)
+            let position = `exercise${num}`.toString()
+            console.log(position)
+            for(let native in yoruba ){
 
-            if(position == native ){
-                console.log(yoruba[native])
-                return(
-                    this.props.navigate('Exercises', {exercise: yoruba[native], language:this.props.language, number: num} )
-                      )
+                if(position == native ){
+                    console.log(yoruba[native])
+                    return(
+                        this.props.navigate('Exercises', {exercise: yoruba[native], language:this.props.language, number: num} )
+                        )
+                }
             }
+            
         }
+
     }
 
- }
+    async videoCount(){
+        try {
+            const value = await AsyncStorage.getItem(this.props.language);
+            console.log('value in async,', value);
+            if (value !== null){
+                let data = value
+                console.log('value,', value);
+                data = parseFloat(value)
+                let one = 1/totalCount
+                console.log('one ', one)
+                let per = + data + one
+                console.log(per)
+                if (per < 1.1){
+                    await AsyncStorage.setItem(this.props.language, `${per}`)
+                }    
+        console.log(totalCount)
+            }
+            else{
+                let data = 1/totalCount
+                await AsyncStorage.setItem(this.props.language, `${data}`)
+              console.log('no token yet')
+              // We have data!!
+             
+            }
+          } catch (error) {
+            // Error retrieving data
+            console.log(error)
+          }
+        
+    //   this.props.navigate('Screen', {video: item.video} )
+    }
+
+
     render(){
-        
+        console.log({topics: this.props.name})
+        this.calculateTotal()
         return(
             
             <View>
@@ -127,7 +186,7 @@ data(num){
                                 </View>
                             }
                         />
-                        <TouchableOpacity onPress={()=> this.props.navigate('Screen', {video: item.video} ) } style = {[styles.video]} >
+                        <TouchableOpacity onPress={ this.videoCount.bind(this) } style = {[styles.video]} >
                         {/* <Image style = {styles.logo} source = {require('../../images/video.png')} /> */}
                             <Text style = {styles.text2}>Watch Video </Text>
                         </TouchableOpacity>

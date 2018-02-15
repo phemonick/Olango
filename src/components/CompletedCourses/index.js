@@ -1,38 +1,29 @@
 import React, { Component } from 'react';
 import { inject } from 'mobx-react'
-import { Text, View, StyleSheet, AsyncStorage, TouchableOpacity, Image, ProgressBarAndroid,Animated, StatusBar } from 'react-native';
-import HomeCard from './HomeCard';
+import { Text, View, StyleSheet, AsyncStorage, TouchableOpacity, Image, ProgressBarAndroid, StatusBar } from 'react-native';
+import Completed from './completed';
 
 // import ProgressBarClassic from 'react-native-progress-bar-classic';
 // import ProgressBarClassic from 'react-native-horizontal-progress-bar'
 import * as Progress from 'react-native-progress';
-
+ 
 
 @inject("stores")
-class Home extends Component {
+class CoursesCompleted extends Component {
 
     constructor(){
         super();
-        this.animated = new Animated.Value(0);
+       
     }
 
     componentWillMount(){
-        // console.log({storeesToken: this.props.stores.auth.authUser})
+        
         this.getEM()
     }
 
     componentDidMount(){
-        this.animate()
         console.log({storeesToken: this.props.stores.config.Token})
 
-    }
-    animate(){
-        //allows to happen every time clicked
-        this.animated.setValue(0)
-        Animated.timing(this.animated, {
-            toValue: 1,
-            duration: 2000
-        }).start();
     }
     async getEM(){
         try {
@@ -54,11 +45,6 @@ class Home extends Component {
     }
 
     render(){
-        const translateX = this.animated.interpolate({
-            inputRange: [0, 1],
-            outputRange: [-500, 1]
-        })
-        const transform = [{translateX}]
         const {stores} = this.props
         const { navigate } = this.props.navigation;
         console.log(this.props.navigation.state.key)
@@ -76,54 +62,40 @@ class Home extends Component {
                         <View style= {styles.logoContainer}>
                             <Image style = {styles.logo} source = {require('../../images/olango.png')} />
                         </View>
-                        <TouchableOpacity style= {styles.logoContainer2}>
+                        <TouchableOpacity style= {styles.logoContainer}>
                             <Image style = {styles.logo2} source = {require('../../images/msg.png')}/>
                         </TouchableOpacity>
                     </View>
-                    <Animated.Text style = {[styles.prog, { transform}]} >Spanish 50% </Animated.Text>
+                    <View style ={styles.progress} >
                     <View style ={styles.space} >
-                                <View style = {styles.bar} >
-                                    <Progress.Bar 
-                                        progress = {0.5} 
-                                        height = {30}
-                                        width = {200}
-                                        color = {'#2ecc71'}
-                                        
-                                    />
-                                </View>
-                                <TouchableOpacity style={styles.progL} >
-                                    <Image style = {styles.arrow} source = {require('../../images/progress.png')} />
-                                </TouchableOpacity>
-                            
+                        <Text style = {styles.prog} >spanish 30% </Text>
+                        <Progress.Bar 
+                            progress = {0.3} 
+                            height = {30}
+                            color = {'#2ecc71'}  
+                        />
                     </View>
-                    <Animated.Text style = {[styles.prog, { transform}]} >French 50% </Animated.Text>
                     <View style ={styles.space} >
-                                <View style = {styles.bar} >
-                                    <Progress.Bar 
-                                        progress = {0.5} 
-                                        height = {30}
-                                        width = {200}
-                                        color = {'#2ecc71'}
-                                        
-                                    />
-                                </View>
-                                <TouchableOpacity style={styles.progL} >
-                                    <Image style = {styles.arrow} source = {require('../../images/progress.png')} />
-                                </TouchableOpacity>
-                            
+                    <Text style = {styles.prog} >French 50% </Text>
+                    <Progress.Bar 
+                        progress = {0.5} 
+                        height = {30}
+                        color = {'#2ecc71'}
+                        
+                    />
                     </View>
-                    
+                    </View>
                 </View>
                 <View style = {styles.card} > 
-                    <Animated.Text style = {[styles.learn, { transform}]}> Learn a Language </Animated.Text>
-                    <HomeCard {...this.props}/>
+                    <Text style = {styles.learn} > Learn a Language </Text>
+                    <Completed {...this.props}/>
                 </View>
             </View>
 
         )
     }
 }
-export default Home;
+export default CoursesCompleted;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -136,8 +108,7 @@ const styles = StyleSheet.create({
     top: {
         elevation: 7,
         backgroundColor: '#34495e',
-        flex: 1,
-        justifyContent: 'space-between'
+        flex: 1
 
     },
     row: {
@@ -145,22 +116,11 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'row',
         width: 100+ '%',
-        padding: 10,
+       
         justifyContent: 'space-between'
     },
-    arrowLogo: {
-        flex: 1,
-        width: 100,
-       
-        height: 40,
-        
-    },
     logoContainer: {
-        flex: 4,
-        alignItems: 'center'
-    },
-    logoContainer2: {
-        flex: 1
+        
     },
     logo: {
         height: 40,
@@ -181,29 +141,21 @@ const styles = StyleSheet.create({
         padding: 10,
         resizeMode: 'contain'
     },
+    arrowLogo: {
+        width: 100,
+        padding: 10,
+        marginBottom:20,
+        height: 40,
+        
+    },
     card: {
         marginTop: 10,
         alignSelf: 'center',
         flex: 2
 
     },
-    
     space: {
-        flexDirection: 'row',
-        width: '100%',
-       justifyContent: "center"
-        
-        
-    },
-    progT: {
-        textAlign: 'center',
-        color: '#fff'
-    },
-    progL: {
-        backgroundColor: '#2ecc71',
-        marginLeft: '2%',
-        borderRadius: 4,
-        padding: 5
+        marginBottom: 10
     },
     progress: {
         

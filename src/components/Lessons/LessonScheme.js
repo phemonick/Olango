@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Image, FlatList, StyleSheet, TouchableOpacity, StatusBar } from 'react-native';
+import { View, Text, Image, FlatList, StyleSheet, TouchableOpacity, StatusBar, AsyncStorage } from 'react-native';
 import LessonList from './LessonList'
 import { BackHandler } from 'react-native';
 import { NavigationActions } from 'react-navigation'
@@ -11,9 +11,11 @@ export default class LessonScheme extends Component{
     constructor(){
         super();
         this.state = {
-            topic: []
+            topic: [],
+            prog: 0
         }
     }
+    
     componentWillMount() {
         BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick);
     }
@@ -27,12 +29,25 @@ export default class LessonScheme extends Component{
         // return true;
     }
 
-    componentDidMount(){
+   async componentDidMount(){
         const { params } = this.props.navigation.state
+        console.log(params.language)
+        const value = await AsyncStorage.getItem(params.language);
+        console.log('value in async ', value)
+        if (value !== null) {
+            this.setState({
+                topic: params.topic,
+                prog: value
+             })
+        }
+        else{
+            this.setState({
+                topic: params.topic,
+                prog: 0
+             })
+        }
         // this.fetchData();
-        this.setState({
-           topic: params.topic
-        })
+        
     }
     static navigationOptions = {
         title: 'contents'
@@ -55,7 +70,8 @@ export default class LessonScheme extends Component{
     render(){
         const { params } = this.props.navigation.state
         const { navigate } = this.props.navigation;
-        console.log(params.language)
+        
+        
         return(
             <View style = {styles.container}>
                 <StatusBar  backgroundColor="rgba(0,0,0,0)"
@@ -71,7 +87,7 @@ export default class LessonScheme extends Component{
                  <View style ={styles.space} >
                     <Text style = {styles.prog} >spanish 30% </Text>
                     <Progress.Bar 
-                        progress = {0.3} 
+                        progress = {this.state.prog} 
                         height = {30}
                         color = {'#2ecc71'}  
                     />

@@ -28,7 +28,42 @@ export default class AuthStore {
         }
         try{
             console.log('password is'+ password)
-            let response = await fetch('https://chatapiendpoint.herokuapp.com/api/v1/user/login', {
+
+            let responseB = await fetch('https://brents-url-olango.herokuapp.com/login', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    
+                    email: email,
+                    password: password,
+                   
+                })
+            })
+            let resB = await responseB.json();
+            console.log(resB)
+
+            //thadeus
+            let responsez = await fetch('https://olango-api.herokuapp.com/auth/email/login', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                
+                email: 'phe@gmail.com',
+                password: '123',
+               
+            })
+        })
+        let resz = await responsez.json();
+        console.log({thadeus: resz})
+
+
+            let response = await fetch('https://chatapis.herokuapp.com/api/v1/user/login', {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
@@ -76,12 +111,14 @@ export default class AuthStore {
                         message: "Success",
                         payload: this.authUser
                     })
+
+                    
                     
                     
                   } catch (error) {
                     console.log('err', error)
                   }
-                  this.props.navigation.navigate('Hom')     
+                //   this.props.navigation.navigate('Hom')     
             
             }
         }

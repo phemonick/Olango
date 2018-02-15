@@ -19,7 +19,7 @@ import Splash from './Splash'
 import EmailConfirm from './Signup/EmailConfirm'
 import ChatLogin from './Chat'
 import ChatRegister from './Chat/Register'
-
+import CompletedCourses from './CompletedCourses'
 const RouteConfig = {
     initialRoute: 'Splash',
     
@@ -92,7 +92,7 @@ const AppNavigator = DrawerNavigator({
     },
     Forum: { screen: Forum,
         navigationOptions: {
-             header: null,
+             
           }
         },
     User: {
@@ -100,6 +100,12 @@ const AppNavigator = DrawerNavigator({
     },
     ChatRegister: {
         screen: ChatRegister,
+        navigationOptions: {
+            header: null
+        }
+    },
+    CompletedCourses: {
+        screen: CompletedCourses,
         navigationOptions: {
             header: null
         }

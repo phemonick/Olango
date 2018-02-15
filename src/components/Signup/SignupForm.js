@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet, TouchableOpacity, TextInput, Picker, KeyboardAvoidingView, ScrollView } from 'react-native'
+import { Text, View, StyleSheet, ToastAndroid, TouchableOpacity, TextInput, Picker, KeyboardAvoidingView, ScrollView } from 'react-native'
 
 
 class SignupForm extends Component {
@@ -20,14 +20,28 @@ class SignupForm extends Component {
 
   async onRegister(){
        try {
-        let response = await fetch('https://chatapiendpoint.herokuapp.com/api/v1/user/signup', {
+           if(this.state.password.length < 6 ) {
+               let err = []
+               err.push('password length too short');
+               console.log(err)
+               this.setState({
+                   errors: err
+               })
+               ToastAndroid.showWithGravity(
+                'password length too short',
+                ToastAndroid.SHORT,
+                ToastAndroid.CENTER
+              );
+               return err
+           }
+        let response = await fetch('https://chatapis.herokuapp.com/api/v1/user/signup', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                fullname: this.state.name,
+                username: this.state.name +" "+ this.state.Lname,
                 lastname: this.state.Lname,
                 email: this.state.email,
                 password: this.state.password,
@@ -43,14 +57,36 @@ class SignupForm extends Component {
             this.setState({
                 errors: res.errors
             })
+            return 
         }else {
             this.setState({
                 errors: ''
 
             })
-            this.props.navigate('Home')
+            
         }
-        
+
+        let responseB = await fetch('https://brents-url-olango.herokuapp.com/create', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                firstname: this.state.name,
+                lastname: this.state.Lname,
+                email: this.state.email,
+                password: this.state.password,
+                sex: this.state.sex,
+                lanuguage: this.state.language
+            })
+        })
+        let resB = await responseB.json();
+        if(resB.message2 == 'error') {
+            
+        }
+        console.log(resB)
+        this.props.navigate('Login')
        }
        catch(err){
         this.setState({
@@ -75,8 +111,10 @@ class SignupForm extends Component {
                     placeholder ='First Name'
                     returnKeyType = 'next'
                     autoCapitalize = 'none'
+                    ref = {name => (this.name = name ) }
+                    onSubmitEditing={()=>this.LnameInput.focus()}
                     autoCorrect = {false}
-                    onSubmitEditing = {() => this.passwordInput.focus()}
+                    
                  />
                  <TextInput 
                     onChangeText = { (text)=> this.setState({Lname: text}) }
@@ -85,8 +123,10 @@ class SignupForm extends Component {
                     placeholder ='Last Name'
                     returnKeyType = 'next'
                     autoCapitalize = 'none'
+                    ref = {input => (this.LnameInput = input ) }
+                    onSubmitEditing={()=>this.emailInput.focus()}
                     autoCorrect = {false}
-                    onSubmitEditing = {() => this.passwordInput.focus()}
+                    
                  />
                  </View>
                  <TextInput 
@@ -95,6 +135,8 @@ class SignupForm extends Component {
                     underlineColorAndroid = 'transparent'
                     placeholder ='Email'
                     keyboardType = 'email-address'
+                    ref = {input => (this.emailInput = input ) }
+                    onSubmitEditing={()=>this.passwordData.focus()}
                     returnKeyType = 'next'
                     autoCapitalize = 'none'
                     autoCorrect = {false}
@@ -105,6 +147,8 @@ class SignupForm extends Component {
                     underlineColorAndroid = 'transparent'
                     placeholder ='Password'
                     secureTextEntry
+                    ref = {input => (this.passwordData = input ) }
+                    onSubmitEditing={()=>this.confF.focus()}
                     returnKeyType = 'next'
                     autoCapitalize = 'none'
                     autoCorrect = {false}
@@ -115,6 +159,8 @@ class SignupForm extends Component {
                     underlineColorAndroid = 'transparent'
                     placeholder ='confirm Password'
                     secureTextEntry
+                    ref = {input => (this.confF = input ) }
+                    
                     returnKeyType = 'next'
                     autoCapitalize = 'none'
                     autoCorrect = {false}
@@ -151,7 +197,7 @@ class SignupForm extends Component {
                 <TouchableOpacity onPress={this.onRegister.bind(this)} style = {styles.register} >
                     <Text style = {styles.registerText}> Register </Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={()=> this.props.navigate('Home')} style = {styles.exist} >
+                <TouchableOpacity onPress={()=> this.props.navigate('Login')} style = {styles.exist} >
                     <Text style = {styles.existText}> I already have an account<Text style={styles.signIn}> SIGN IN </Text> </Text>
                 </TouchableOpacity>
                 </ScrollView>

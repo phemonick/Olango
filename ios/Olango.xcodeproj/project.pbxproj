@@ -56,6 +56,9 @@
 		863F37B4128543C99FCF1A58 /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2B03450DB8E4B6A925E9305 /* VideoToolbox.framework */; };
 		DA6FD3D2BE014604BF1E6A05 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45F73FB7689A4A13B9A04A8E /* GLKit.framework */; };
 		16C833B0263C4BABAC19AD21 /* libVoxImplantSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A9AC88A08ECA41DB9846CDB8 /* libVoxImplantSDK.a */; };
+		312BDB9D4E2F4FE4AA9F6E60 /* libRNDocumentPicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 27030BF1ADE846E1BEB2931C /* libRNDocumentPicker.a */; };
+		5753AFDDFE894A8C8BF68AA1 /* libRNFetchBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F7F324AA77447448C6B511A /* libRNFetchBlob.a */; };
+		105B9464E57243A094898D0C /* libRNImagePicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F59C381548064A6DAC8BDF67 /* libRNImagePicker.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -307,6 +310,12 @@
 		C2B03450DB8E4B6A925E9305 /* VideoToolbox.framework */ = {isa = PBXFileReference; name = "VideoToolbox.framework"; path = "System/Library/Frameworks/VideoToolbox.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
 		45F73FB7689A4A13B9A04A8E /* GLKit.framework */ = {isa = PBXFileReference; name = "GLKit.framework"; path = "System/Library/Frameworks/GLKit.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
 		A9AC88A08ECA41DB9846CDB8 /* libVoxImplantSDK.a */ = {isa = PBXFileReference; name = "libVoxImplantSDK.a"; path = "C:/Users/TROGGEURBAN/Desktop/Olango/node_modules/react-native-voximplant/ios/VoxImplantSDK/lib/libVoxImplantSDK.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		F13FC1DF4F2440E2A8A7A1EF /* RNDocumentPicker.xcodeproj */ = {isa = PBXFileReference; name = "RNDocumentPicker.xcodeproj"; path = "../node_modules/react-native-document-picker/ios/RNDocumentPicker.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		27030BF1ADE846E1BEB2931C /* libRNDocumentPicker.a */ = {isa = PBXFileReference; name = "libRNDocumentPicker.a"; path = "libRNDocumentPicker.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		A073198C463040D7B93339F5 /* RNFetchBlob.xcodeproj */ = {isa = PBXFileReference; name = "RNFetchBlob.xcodeproj"; path = "../node_modules/react-native-fetch-blob/ios/RNFetchBlob.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		3F7F324AA77447448C6B511A /* libRNFetchBlob.a */ = {isa = PBXFileReference; name = "libRNFetchBlob.a"; path = "libRNFetchBlob.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		13D87C05630A4B5488C7B263 /* RNImagePicker.xcodeproj */ = {isa = PBXFileReference; name = "RNImagePicker.xcodeproj"; path = "../node_modules/react-native-image-picker/ios/RNImagePicker.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		F59C381548064A6DAC8BDF67 /* libRNImagePicker.a */ = {isa = PBXFileReference; name = "libRNImagePicker.a"; path = "libRNImagePicker.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -343,6 +352,9 @@
 				863F37B4128543C99FCF1A58 /* VideoToolbox.framework in Frameworks */,
 				DA6FD3D2BE014604BF1E6A05 /* GLKit.framework in Frameworks */,
 				16C833B0263C4BABAC19AD21 /* libVoxImplantSDK.a in Frameworks */,
+				312BDB9D4E2F4FE4AA9F6E60 /* libRNDocumentPicker.a in Frameworks */,
+				5753AFDDFE894A8C8BF68AA1 /* libRNFetchBlob.a in Frameworks */,
+				105B9464E57243A094898D0C /* libRNImagePicker.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -515,6 +527,9 @@
 				1BFF029B70544F9EB4A16773 /* RCTYouTube.xcodeproj */,
 				BBB19A55750A4F66BE271A8D /* RNBackgroundTimer.xcodeproj */,
 				F1BA33CD311D46489094C5C4 /* VoxImplant.xcodeproj */,
+				F13FC1DF4F2440E2A8A7A1EF /* RNDocumentPicker.xcodeproj */,
+				A073198C463040D7B93339F5 /* RNFetchBlob.xcodeproj */,
+				13D87C05630A4B5488C7B263 /* RNImagePicker.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -1110,6 +1125,9 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"C:/Users/TROGGEURBAN/Desktop/Olango/node_modules/react-native-voximplant/ios/VoxImplantSDK/lib\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1117,6 +1135,9 @@
 					"$(SRCROOT)\..\node_modules\react-native-youtube/**",
 					"$(SRCROOT)\..\node_modules\react-native-background-timer\ios",
 					"$(SRCROOT)\..\node_modules\react-native-voximplant\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-document-picker\ios\RNDocumentPicker",
+					"$(SRCROOT)\..\node_modules\react-native-fetch-blob\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-image-picker\ios",
 				);
 			};
 			name = Debug;
@@ -1140,6 +1161,9 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"C:/Users/TROGGEURBAN/Desktop/Olango/node_modules/react-native-voximplant/ios/VoxImplantSDK/lib\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1147,6 +1171,9 @@
 					"$(SRCROOT)\..\node_modules\react-native-youtube/**",
 					"$(SRCROOT)\..\node_modules\react-native-background-timer\ios",
 					"$(SRCROOT)\..\node_modules\react-native-voximplant\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-document-picker\ios\RNDocumentPicker",
+					"$(SRCROOT)\..\node_modules\react-native-fetch-blob\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-image-picker\ios",
 				);
 			};
 			name = Release;
@@ -1172,10 +1199,16 @@
 					"$(SRCROOT)\..\node_modules\react-native-youtube/**",
 					"$(SRCROOT)\..\node_modules\react-native-background-timer\ios",
 					"$(SRCROOT)\..\node_modules\react-native-voximplant\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-document-picker\ios\RNDocumentPicker",
+					"$(SRCROOT)\..\node_modules\react-native-fetch-blob\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-image-picker\ios",
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"C:/Users/TROGGEURBAN/Desktop/Olango/node_modules/react-native-voximplant/ios/VoxImplantSDK/lib\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 			};
 			name = Debug;
@@ -1200,10 +1233,16 @@
 					"$(SRCROOT)\..\node_modules\react-native-youtube/**",
 					"$(SRCROOT)\..\node_modules\react-native-background-timer\ios",
 					"$(SRCROOT)\..\node_modules\react-native-voximplant\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-document-picker\ios\RNDocumentPicker",
+					"$(SRCROOT)\..\node_modules\react-native-fetch-blob\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-image-picker\ios",
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"C:/Users/TROGGEURBAN/Desktop/Olango/node_modules/react-native-voximplant/ios/VoxImplantSDK/lib\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 			};
 			name = Release;
@@ -1236,6 +1275,9 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"C:/Users/TROGGEURBAN/Desktop/Olango/node_modules/react-native-voximplant/ios/VoxImplantSDK/lib\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1243,6 +1285,9 @@
 					"$(SRCROOT)\..\node_modules\react-native-youtube/**",
 					"$(SRCROOT)\..\node_modules\react-native-background-timer\ios",
 					"$(SRCROOT)\..\node_modules\react-native-voximplant\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-document-picker\ios\RNDocumentPicker",
+					"$(SRCROOT)\..\node_modules\react-native-fetch-blob\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-image-picker\ios",
 				);
 			};
 			name = Debug;
@@ -1275,6 +1320,9 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"C:/Users/TROGGEURBAN/Desktop/Olango/node_modules/react-native-voximplant/ios/VoxImplantSDK/lib\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1282,6 +1330,9 @@
 					"$(SRCROOT)\..\node_modules\react-native-youtube/**",
 					"$(SRCROOT)\..\node_modules\react-native-background-timer\ios",
 					"$(SRCROOT)\..\node_modules\react-native-voximplant\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-document-picker\ios\RNDocumentPicker",
+					"$(SRCROOT)\..\node_modules\react-native-fetch-blob\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-image-picker\ios",
 				);
 			};
 			name = Release;
@@ -1309,6 +1360,9 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"C:/Users/TROGGEURBAN/Desktop/Olango/node_modules/react-native-voximplant/ios/VoxImplantSDK/lib\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 			};
 			name = Debug;
@@ -1336,6 +1390,9 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"C:/Users/TROGGEURBAN/Desktop/Olango/node_modules/react-native-voximplant/ios/VoxImplantSDK/lib\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 			};
 			name = Release;
