@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity, Image, StatusBar } from 'react-native';
 import PayForm from './PayForm'
 import PayStac from './Paystack'
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 export default class Pay extends Component {
 
@@ -10,7 +11,10 @@ export default class Pay extends Component {
         console.log(this.props.navigation.state.key)
         return(
             <View style = {styles.container}>
-                <View style ={styles.content} >  
+                    <StatusBar  backgroundColor="rgba(0,0,0,0)"
+                        networkActivityIndicatorVisible={false}
+                        translucent={true}
+                        barStyle="light-content" />
                     <View style= {styles.logoContainer}>
                         <Image style = {styles.logo} source = {require('../../images/olango.png')} />
                     </View>
@@ -18,9 +22,13 @@ export default class Pay extends Component {
                         <PayStac />
                     </View>
                     <View style = {styles.bottom} >
-
+                        <Text style={{textAlign: 'center', fontSize: 20, color: '#fff'}}> Goto Home </Text>
+                        <TouchableOpacity onPress={()=>navigate('Hom')} >
+                            
+                            <Icon name="trending-flat" size={100} color={'#000'}  />
+                        </TouchableOpacity>
                     </View>
-                </View>
+                
             </View>
 
         )
@@ -36,11 +44,14 @@ const styles = StyleSheet.create({
     },
     content: {
         flex: 1,
-        backgroundColor: 'blue'
+        // backgroundColor: 'blue'
     },
     logoContainer: {
+        flex: 1,
         width: 100 + '%',
-        alignSelf: 'flex-start'
+        justifyContent: 'center',
+        alignItems: 'center',
+
     },
     logo: {
         width: 100+'%',
@@ -54,12 +65,15 @@ const styles = StyleSheet.create({
 
     },
     pay: {
-        flex: 3,
+        flex: 6,
         backgroundColor: 'red'
     },
     bottom: {
         flex: 1,
-        backgroundColor: 'yellow'
+        flexDirection: 'row',
+        // backgroundColor: 'green',
+        alignItems: 'center',
+        justifyContent: 'center'
     },
     learn: {
         color: '#fff',

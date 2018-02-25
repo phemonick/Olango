@@ -52,7 +52,7 @@ async testRoute(){
   try{
       console.log({"state Token":this.state.token})
   
-  let response = await fetch('https://chatapiendpoint.herokuapp.com/api/v1/chats', {
+  let response = await fetch('https://olangochat.herokuapp.com/api/v1/chats', {
       headers: {
           'Authorization': this.state.token,
           'Accept': 'application/json',

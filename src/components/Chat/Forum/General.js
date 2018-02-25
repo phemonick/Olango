@@ -2,11 +2,11 @@ import React from 'react';
 import { View, Text, AsyncStorage , StyleSheet, BackHandler, Dimensions, TouchableOpacity, Image, TextInput} from 'react-native';
 import BackgroundTimer from 'react-native-background-timer'
 import { GiftedChat, Bubble } from 'react-native-gifted-chat';
+
 window.navigator.userAgent = 'react-native';
  const io = require('react-native-socket.io-client/socket.io');
 
 
-const USER_ID = '@userId';
 
  class General extends React.Component {
 
@@ -23,7 +23,7 @@ const USER_ID = '@userId';
     };
     
     // this.onReceivedMessage = this.onReceivedMessage.bind(this);
-    this.socket = io('https://chatapis.herokuapp.com');
+    this.socket = io('https://olangochat.herokuapp.com');
     let sender = this.state.username
     this.socket.on('connect', ()=>{
         console.log('connected to server', this.state.username)
@@ -92,7 +92,7 @@ const USER_ID = '@userId';
     await this.getToken()
     try{
       console.log(this.state.token)
-      let response = await fetch('https://chatapis.herokuapp.com/api/v1/forum/message/general', {
+      let response = await fetch('https://olangochat.herokuapp.com/api/v1/forum/message/general', {
       headers: {
           'Authorization': this.state.token,
           'Accept': 'application/json',
@@ -180,7 +180,7 @@ const USER_ID = '@userId';
   async sendMessage(message){
     try{
       console.log("when we send", message)
-      let response = await fetch('https://chatapis.herokuapp.com/api/v1/forum/message/general', {
+      let response = await fetch('https://olangochat.herokuapp.com/api/v1/forum/message/general', {
             method: 'POST',
             headers: {
               'Authorization': this.state.token,
@@ -256,6 +256,7 @@ const USER_ID = '@userId';
           renderBubble={this.renderBubble.bind(this)}
           
         />
+        
     
 
       
@@ -347,7 +348,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#000',
   },
   
-
+ 
 })
 
 module.exports = General;

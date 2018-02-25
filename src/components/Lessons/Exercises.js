@@ -87,7 +87,7 @@ export default class Exercises extends Component {
             renderItem={item =>
               <Card style={{ elevation: 3 }}>
                 <CardItem style = {styles.card1}>
-                      
+                     
                     <Text style={styles.quest}>{item.question}. {item.exercise}</Text>
                     <View style={styles.body}>
                       <TextInput 

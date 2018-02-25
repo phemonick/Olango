@@ -1,14 +1,16 @@
-import { observable, action } from 'mobx';
+import { observable, action, computed } from 'mobx';
 import { AsyncStorage } from 'react-native'
 
 export default class AuthStore {
     @observable error ;
     @observable authUser
+    @observable loading
 
     constructor() {
 
         this.error = ''
         this.authUser=''
+        this.loading = false
     }
     get authUsers(){
         let storedata = JSON.parse(this.authUser) 
@@ -16,19 +18,23 @@ export default class AuthStore {
             userInfo: storedata
         })
     }
+   
+    get loadings(){
+        return this.loading
+    }
     @action
    async signIn({email, password}) {
         // if(this.authUser) {
         //     return Promise.resolve(this.authUser)
         // }
         if( email ==='' && password === '') {
-            this.error = 'invalid input in store';
+            this.error = 'invalid input ';
             console.log(this.error)
             return null
         }
         try{
             console.log('password is'+ password)
-
+            this.loading = true
             let responseB = await fetch('https://brents-url-olango.herokuapp.com/login', {
                 method: 'POST',
                 headers: {
@@ -63,7 +69,7 @@ export default class AuthStore {
         console.log({thadeus: resz})
 
 
-            let response = await fetch('https://chatapis.herokuapp.com/api/v1/user/login', {
+            let response = await fetch('https://olangochat.herokuapp.com/api/v1/user/login', {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
@@ -80,7 +86,7 @@ export default class AuthStore {
             console.log(res.message)
             let payload = JSON.stringify(res)
             console.log({data: payload})
-            
+            this.loading = false
             if(res.message =='Login Errors'){
                 console.log(res.errors[0].msg)               
                 this.error = res.errors[0].msg

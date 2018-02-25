@@ -5,12 +5,13 @@ import { inject } from 'mobx-react'
 @inject("stores")
 export default class Splash extends Component {
 
+    state={
+        component: ''
+    }
     constructor(props){
         super(props);
         this.animated = new Animated.Value(0);
-        this.state={
-            component: ''
-        }
+        
     }
     componentWillMount(){
         console.log('started')

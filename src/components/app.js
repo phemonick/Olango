@@ -17,9 +17,14 @@ import Forum from './Chat/Forum/forum'
 import User from './Chat/Home/Users'
 import Splash from './Splash'
 import EmailConfirm from './Signup/EmailConfirm'
-import ChatLogin from './Chat'
-import ChatRegister from './Chat/Register'
+import Call from './Chat/Call'
 import CompletedCourses from './CompletedCourses'
+import Intermediates from './Intermediates'
+import Scheme from './Intermediates/Scheme'
+import AdminHome from './Chat/Tutor/'
+import ForgotPassword from './Login/ForgotPassword'
+import Vid from './Chat/Vid'
+
 const RouteConfig = {
     initialRoute: 'Splash',
     
@@ -52,12 +57,6 @@ const AppNavigator = DrawerNavigator({
     Draw: {
         screen: Home
     },
-    ChatLogin: {
-        screen: ChatLogin,
-        navigationOptions: {
-            header: null
-        }
-    },
     SignUp: { screen: SignUp,
         navigationOptions: {
             header: null,
@@ -87,6 +86,9 @@ const AppNavigator = DrawerNavigator({
     Tutor: {
         screen: Tutor
     },
+    AdminHome: {
+        screen: AdminHome
+    },
     Pay: {
         screen: Pay
     },
@@ -98,17 +100,30 @@ const AppNavigator = DrawerNavigator({
     User: {
         screen: User
     },
-    ChatRegister: {
-        screen: ChatRegister,
-        navigationOptions: {
-            header: null
-        }
-    },
     CompletedCourses: {
         screen: CompletedCourses,
         navigationOptions: {
             header: null
         }
+    },
+    Intermediates: {
+        screen: Intermediates
+    },
+    Call: {
+        screen: Call
+    },
+    Vid: {
+        screen: Vid
+    },
+    
+    Scheme: {
+        screen: Scheme
+    },
+    EmailConfirm: {
+        screen: EmailConfirm
+    },
+    ForgotPassword: {
+        screen: ForgotPassword
     }
 },
 RouteConfig

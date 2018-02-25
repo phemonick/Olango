@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { StyleSheet, View, TextInput, TouchableOpacity, AsyncStorage, Text,KeyboardAvoidingView, StatusBar } from 'react-native';
 //  watches observables
 import { observer } from 'mobx-react/native'
+import Spinner from "react-native-loading-spinner-overlay";
+
 // when observable changes it re-renders
 import { observable } from 'mobx'
 //for asyncStorage, global to the app
@@ -97,7 +99,7 @@ async onLoginPressed(){
 
     try{
         console.log('password is'+ this.state.password)
-        let responsez = await fetch('https://olango-api.herokuapp.com/auth/email/login', {
+        let responsez = await fetch('https://olangochat.herokuapp.com/auth/email/login', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -118,7 +120,7 @@ async onLoginPressed(){
     }
     try{
         console.log('password is'+ this.state.password)
-        let response = await fetch('https://chatapiendpoint.herokuapp.com/api/v1/user/login', {
+        let response = await fetch('https://olangochat.herokuapp.com/api/v1/user/login', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -174,8 +176,9 @@ async onLoginPressed(){
 
     render() {
         const { auth } = this.props.stores
+        console.log({loading: auth.loading})
         return (
-            <KeyboardAvoidingView keyboardVerticalOffset={50} behavior='position' style = {styles.container} >
+            <View style = {styles.container} >
                 <StatusBar barStyle = 'light-content' />
                 <TextInput 
                     onChangeText = {this.emailChange.bind(this) }
@@ -205,10 +208,11 @@ async onLoginPressed(){
                 <TouchableOpacity onPress={()=> this.props.navigation.navigate('SignUp')} style = {styles.signUp} >
                    <Text style = {styles.bottomText}> Don't have an account? SIGN UP </Text>
                 </TouchableOpacity> 
-                <TouchableOpacity style = {styles.signUp} onPress={()=> this.props.navigation.navigate('Hom')} > 
+                <TouchableOpacity style = {styles.signUp} onPress={()=> this.props.navigation.navigate('ForgotPassword')} > 
                    <Text style = {styles.bottomText} > Forgot your password </Text>
                 </TouchableOpacity>
-            </KeyboardAvoidingView>
+                <Spinner visible={auth.loadings} />
+            </View>
         )
     }
 }
@@ -216,21 +220,23 @@ export default LoginForm;
  
 const styles = StyleSheet.create({
     container: {
-
+        flex: 1,
+        justifyContent: 'center'
     },
     input: {
         backgroundColor: 'rgba(255,255,255,1)',
         marginTop: 15,
-        height: 50,
+        height: 60,
         textAlign: 'center',
         color: '#7f8c8d',
         fontSize: 20,
         borderRadius: 6,
-        paddingHorizontal: 20
+        paddingHorizontal: 10
     },
     buttonContainer: {
         backgroundColor: '#2980b9',
         borderRadius: 6,
+        height: 60,
         paddingVertical: 15,
         marginTop: 10
     },

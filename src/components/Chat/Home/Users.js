@@ -52,7 +52,7 @@ export default class User extends Component{
                                         </Body>
                                     </TouchableOpacity>
                                     <Right>
-                                        <Text note>3:43 pm</Text>
+                                        <Text note></Text>
                                     </Right>
                                 </ListItem>
                             </List>   

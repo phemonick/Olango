@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { StyleSheet, View, Image,AsyncStorage, Text, TouchableOpacity, KeyboardAvoidingView, StatusBar } from 'react-native'
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 class SignIn extends Component{
     
@@ -46,35 +47,43 @@ class SignIn extends Component{
                 networkActivityIndicatorVisible={false}
                 translucent={true}
                 barStyle="light-content" />
-                <View style = {styles.content} >
+                
 
                     <View style= {styles.logoContainer}>
                         <Image style = {styles.logo} source = {require('../../images/olango.png')} />
                         <Text style = {styles.logoText}>The global world of language</Text>
                     </View>
 
-                    <View>
-                        <View style = {styles.getStarted} >
+                    
+                    <View style = {styles.getStarted} >
                             <TouchableOpacity onPress = {()=>navigate('SignUp')} style = {styles.createAccount}>
                                 <Text style = {styles.media} > Create Account </Text>
                             </TouchableOpacity>
-                            <TouchableOpacity onPress={this.facebook.bind(this)} style = {styles.facebook}>
-                                <Text style = {styles.media}> Join with Facebook </Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity style = {styles.google}>
-                                <Text style = {styles.media}> Join with Google </Text>
-                            </TouchableOpacity>
-                        </View>
+                            <View style={{margin: 10, width: '100%', alignSelf: 'center',justifyContent:'center', flex: 1,}} >
+                                <Icon.Button name="facebook" backgroundColor='#3b5998'  style = {styles.facebook} onPress={this.facebook.bind(this)}>
+                                    <Text style = {styles.media}>Login with Facebook</Text>
+                                </Icon.Button>
+                            </View>
+
+                            <View style={{margin: 10, width: '100%', alignSelf: 'center', flex: 1,}} >
+                                <Icon.Button name="google" backgroundColor='red'  style = {styles.google} onPress={this.facebook.bind(this)}>
+                                    <Text style = {styles.media}>Login with Google</Text>
+                                </Icon.Button>
+                            </View>
+                            
+                            
+                            
+                        
                     </View>
 
-                    <View>
+                    <View style={styles.bottom} >
                         <Text style = {styles.media}> Already an OlangO member? </Text>
                         <TouchableOpacity onPress = {this.goHome.bind(this)} style = {styles.SignIn}>
-                            <Text style = {styles.media}> Sign In </Text>
+                            <Text style = {styles.media2}> Sign In </Text>
                         </TouchableOpacity>
                     </View>
 
-                </View>
+                
             </View>
 
         )
@@ -90,11 +99,14 @@ const styles = StyleSheet.create({
     },
     content: {
         display: 'flex',
+        
         height: 80 + '%',
         flexDirection: 'column',
         justifyContent: 'space-around',
     },
     logoContainer: {
+        marginTop: 10,
+        flex: 1,
         width: 100 + '%',
         alignSelf: 'flex-start',
         marginBottom: 20
@@ -112,30 +124,44 @@ const styles = StyleSheet.create({
         alignSelf: 'center'
     },
     getStarted: {
+        flex: 2,
         width: 70 + '%',
         alignSelf: 'center',
+       
     },
     media: {
         textAlign: 'center',
-        color: '#fff'
+        color: '#fff',
+        fontSize: 15,
+    },
+    media2: {
+        textAlign: 'center',
+        color: '#fff',
+        fontSize: 20,
     },
     createAccount: {
         backgroundColor: '#00BCD4',
         borderRadius: 6,
         paddingVertical: 15,
-        marginTop: 10
+        marginTop: 10,
+       
     },
     facebook: {
-        backgroundColor: '#3F51B5',
-        borderRadius: 6,
+        backgroundColor: '#3b5998',
+        // borderRadius: 6,
         paddingVertical: 15,
-        marginTop: 10
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     google: {
         backgroundColor: '#F44336',
         borderRadius: 6,
         paddingVertical: 15,
-        marginTop: 10
+        justifyContent: 'center',
+        
+    },
+    bottom: {
+        flex: 1
     },
     SignIn: {
         backgroundColor: '#2ecc71',

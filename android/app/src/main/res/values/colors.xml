@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Change the color value for your need -->
+    <color name="colorPrimary">#008841</color>
+    <color name="colorPrimaryDark">#008841</color>
+    <color name="colorAccent">#008841</color>
+    <color name="textColor">#000000</color>
+    <color name="dialogBg">#AEA8D3</color>
+    <color name="dialogT">#674172</color>
+    <color name="dialogAccent">#3A539B</color>
+
+        
+
+
+</resources>

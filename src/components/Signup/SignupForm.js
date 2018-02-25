@@ -19,8 +19,9 @@ class SignupForm extends Component {
     }
 
   async onRegister(){
+    
        try {
-           if(this.state.password.length < 6 ) {
+           if(this.state.password.length < 6 ) { 
                let err = []
                err.push('password length too short');
                console.log(err)
@@ -34,7 +35,7 @@ class SignupForm extends Component {
               );
                return err
            }
-        let response = await fetch('https://chatapis.herokuapp.com/api/v1/user/signup', {
+        let response = await fetch('https://olangochat.herokuapp.com/api/v1/user/signup', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -86,7 +87,7 @@ class SignupForm extends Component {
             
         }
         console.log(resB)
-        this.props.navigate('Login')
+        this.props.navigate('EmailConfirm')
        }
        catch(err){
         this.setState({
@@ -99,35 +100,36 @@ class SignupForm extends Component {
         
         return(
             
-            <KeyboardAvoidingView  style = {styles.container} >
-            <ScrollView>
+            
+            <ScrollView style = {styles.container}>
                 {this.state.errors.length == 0 ? (<Text> </Text>) :(<Text style ={ styles.err }> {this.state.errors[0].msg} </Text>) }
                 
                 <View style={styles.name}>
-                <TextInput 
-                    onChangeText = { (text)=> this.setState({name: text}) }
-                    style = {styles.fandLast}
-                    underlineColorAndroid = 'transparent'
-                    placeholder ='First Name'
-                    returnKeyType = 'next'
-                    autoCapitalize = 'none'
-                    ref = {name => (this.name = name ) }
-                    onSubmitEditing={()=>this.LnameInput.focus()}
-                    autoCorrect = {false}
-                    
-                 />
-                 <TextInput 
-                    onChangeText = { (text)=> this.setState({Lname: text}) }
-                    style = {styles.fandLast}
-                    underlineColorAndroid = 'transparent'
-                    placeholder ='Last Name'
-                    returnKeyType = 'next'
-                    autoCapitalize = 'none'
-                    ref = {input => (this.LnameInput = input ) }
-                    onSubmitEditing={()=>this.emailInput.focus()}
-                    autoCorrect = {false}
-                    
-                 />
+                    <TextInput 
+                        onChangeText = { (text)=> this.setState({name: text}) }
+                        style = {styles.fandLast}
+                        underlineColorAndroid = 'transparent'
+                        placeholder ='First Name'
+                        returnKeyType = 'next'
+                        autoCapitalize = 'none'
+                        ref = {name => (this.name = name ) }
+                        onSubmitEditing={()=>this.LnameInput.focus()}
+                        autoCorrect = {false}
+                        
+                    />
+                    <Text style={{fontSize: 20}}> | </Text>
+                    <TextInput 
+                        onChangeText = { (text)=> this.setState({Lname: text}) }
+                        style = {styles.fandLast}
+                        underlineColorAndroid = 'transparent'
+                        placeholder ='Last Name'
+                        returnKeyType = 'next'
+                        autoCapitalize = 'none'
+                        ref = {input => (this.LnameInput = input ) }
+                        onSubmitEditing={()=>this.emailInput.focus()}
+                        autoCorrect = {false}
+                        
+                    />
                  </View>
                  <TextInput 
                     onChangeText = { (text)=> this.setState({email: text}) }
@@ -201,7 +203,7 @@ class SignupForm extends Component {
                     <Text style = {styles.existText}> I already have an account<Text style={styles.signIn}> SIGN IN </Text> </Text>
                 </TouchableOpacity>
                 </ScrollView>
-            </KeyboardAvoidingView>
+            
             
         )
     }
@@ -210,7 +212,9 @@ export default SignupForm;
 
 const styles = StyleSheet.create({
     container: {
-        width: 100 + '%'
+        
+        width: 100 + '%',
+        backgroundColor: '#34495e',
     },
     err: {
         color: '#e74c3c',
@@ -232,7 +236,7 @@ const styles = StyleSheet.create({
     fandLast: {
         backgroundColor: 'rgba(255,255,255,1)',
         marginBottom: 10,
-        width: 50+ '%',
+        width: 40+ '%',
         height: 40,
         color: '#7f8c8d',
         borderRadius: 6,

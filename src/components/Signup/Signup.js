@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import { StyleSheet, View, Image, Text, TouchableOpacity, KeyboardAvoidingView, ToastAndroid } from 'react-native';
+import { StyleSheet, View, Image, Text, TouchableOpacity, KeyboardAvoidingView,AsyncStorage, ToastAndroid } from 'react-native';
 import { DocumentPicker, DocumentPickerUtil } from 'react-native-document-picker';
+import ImagePicker from 'react-native-image-picker'
 import RNFetchBlob from 'react-native-fetch-blob';
 import {
     CachedImage,
@@ -14,8 +15,56 @@ class Signup extends Component{
     constructor(){
         super()
         this.state = {
-            filePath: ''
+            filePath: '',
+            avatarSource: ''
         }
+    }
+
+   async selectImg(){
+        let options = {
+            title: 'Select Avatar',
+            // customButtons: [
+            //   {name: 'fb', title: 'Choose Photo from Facebook'},
+            // ],
+            storageOptions: {
+              skipBackup: true,
+              path: 'images'
+            }
+          };
+        ImagePicker.showImagePicker(options, async (response) => {
+            console.log('Response = ', response);
+          
+            if (response.didCancel) {
+              console.log('User cancelled image picker');
+            }
+            else if (response.error) {
+              console.log('ImagePicker Error: ', response.error);
+            }
+            else if (response.customButton) {
+              console.log('User tapped custom button: ', response.customButton);
+            }
+            else {
+              let source = { uri: response.uri };
+              ToastAndroid.show(
+                'Image has been selected',
+                ToastAndroid.SHORT,
+              );
+          
+              // You can also display the image using data:
+              // let source = { uri: 'data:image/jpeg;base64,' + response.data };
+              source = JSON.stringify(source)
+              console.log(source)
+              await AsyncStorage.setItem('avatarSource',source).then((val)=>{
+                console.log({"stored item error":val})
+            })
+           let img = await AsyncStorage.getItem('avatarSource')
+           console.log('image selected', img)
+          
+              this.setState({
+                avatarSource: source
+              });
+            }
+          });
     }
 
     pickFIle(){
@@ -39,23 +88,7 @@ class Signup extends Component{
               console.log({imagePath: res})
               const split = res.uri.split('/');
 
-              RNFetchBlob.fetch('GET', 'file://' + res.uri + res.fileName, {
-                        
-                    })
-                    // when response status code is 200
-                    .then((res) => {
-                        // the conversion is done in native code
-                        let base64Str = res.base64()
-                        // the following conversions are done in js, it's SYNC
-                        let text = res.text()
-                        let json = res.json()
-
-                    })
-                    // Status code is not 200
-                    .catch((errorMessage, statusCode) => {
-                        // error handling
-                        console.log({errorMessag: errorMessage})
-                    })
+             
 
             const name = split.pop();
             const inbox = split.pop();
@@ -90,7 +123,7 @@ class Signup extends Component{
                         </View>
                     </View>
                     <View style = {styles.formContainer} >
-                        <TouchableOpacity onPress={this.pickFIle.bind(this)} >
+                        <TouchableOpacity onPress={this.selectImg.bind(this)} >
                             <Image style = {styles.camera} source = {require('../../images/camera.png')} />
                         </TouchableOpacity>
                         <SignupForm navigate = {navigate} />

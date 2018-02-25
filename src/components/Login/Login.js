@@ -15,18 +15,18 @@ class Login extends Component{
                 networkActivityIndicatorVisible={false}
                 translucent={true}
                 barStyle="light-content" />
-            <View style = {styles.content} >
-                 <TouchableOpacity onPress={()=>this.props.navigation.navigate('SignIn')}  style= {styles.arrowLogo}>
-                    <Image style = {styles.arrow} source = {require('../../images/arrow.png')} />
-                </TouchableOpacity>
-                <View style= {styles.logoContainer}>
-                    <Image style = {styles.logo} source = {require('../../images/olango.png')} />
-                    <Text style = {styles.logoText}>The global world of language</Text>
-                </View>
-                <View style = {styles.formContainer} >
-                    <LoginForm {...this.props} />
-                </View>
-            </View>
+            {/* <View style = {styles.content} > */}
+                    <TouchableOpacity onPress={()=>this.props.navigation.navigate('SignIn')}  style= {styles.arrowLogo}>
+                        <Image style = {styles.arrow} source = {require('../../images/arrow.png')} />
+                    </TouchableOpacity>
+                    <View style= {styles.logoContainer}>
+                        <Image style = {styles.logo} source = {require('../../images/olango.png')} />
+                        <Text style = {styles.logoText}>The global world of language</Text>
+                    </View>
+                    <View style = {styles.formContainer} >
+                        <LoginForm {...this.props} />
+                    </View>
+            {/* </View> */}
             </KeyboardAvoidingView>
 
         )
@@ -44,6 +44,8 @@ const styles = StyleSheet.create({
         
     },
     arrowLogo: {
+        paddingTop: 20,
+        flex: 1,
         width: 100,
         padding: 10,
         marginBottom:20,
@@ -56,6 +58,7 @@ const styles = StyleSheet.create({
         padding: 10
     },
     logoContainer: {
+        flex: 1,
         width: 100 + '%',
         alignSelf: 'flex-start',
         marginBottom: 20
@@ -76,7 +79,9 @@ const styles = StyleSheet.create({
 
     },
     formContainer: {
-        margin: 20,
+        marginTop: 20,
+        flex: 7,
+        // backgroundColor: '#fff',
         marginBottom: 0,
         alignSelf: 'stretch',
         padding: 20,

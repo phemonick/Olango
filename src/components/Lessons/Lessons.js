@@ -11,13 +11,15 @@ export default class Lessons extends Component{
     static navigationOptions(){
         header: null
     }
+    state = {
+        topic: [],
+        intermediateData: []
+    }
 
     constructor(){
         super();
         this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
-        this.state = {
-            topic: []
-        }
+        
         
     }
 
@@ -37,6 +39,7 @@ export default class Lessons extends Component{
     componentDidMount(){
         BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick);
         this.beginnerData();
+        this.intermediateInfo()
     }
     next(){
         const { navigate } = this.props.navigation;
@@ -48,6 +51,17 @@ export default class Lessons extends Component{
             navigate('LessonScheme', {language: params.name, topic: this.state.topic})
         }
          
+    }
+    nextInt(){
+        const { navigate } = this.props.navigation;
+        const { params } = this.props.navigation.state
+        if(this.state.intermediateData.length===0){
+            alert('poor network connection')
+        }
+        else{
+            navigate('Intermediates', {language: params.name, content: this.state.intermediateData})
+        }
+
     }
 
    async beginnerData(){
@@ -74,6 +88,21 @@ export default class Lessons extends Component{
         console.log('error in fetch ' + err)
     }
     }
+    async intermediateInfo(){
+        try{
+            const { params } = this.props.navigation.state
+            const { navigate } = this.props.navigation;
+            console.log(params.name)
+            let response = await fetch(`https://brents-url-olango.herokuapp.com/Allintermediate/${params.name}`);
+            let responseJson = await response.json();
+            
+            console.log({intermediates_response: responseJson})   
+            this.setState({intermediateData: responseJson})
+        }
+        catch(err){
+            console.log('error in fetch ' + err)
+        }
+        }
 
     render(){
         const { navigate } = this.props.navigation;
@@ -90,7 +119,7 @@ export default class Lessons extends Component{
                  <TouchableOpacity onPress = {this.next.bind(this) }  style = {styles.beginers} > 
                      <Text style = {styles.text}> Beginner </Text>
                  </TouchableOpacity> 
-                 <TouchableOpacity style = {styles.intermediate} > 
+                 <TouchableOpacity onPress = {this.nextInt.bind(this) } style = {styles.intermediate} > 
                      <Text style = {styles.text}> Intermediate </Text>
                  </TouchableOpacity> 
                  

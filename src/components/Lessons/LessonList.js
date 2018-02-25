@@ -3,6 +3,8 @@ import { View, StyleSheet, Text, FlatList, ScrollView, Image ,TouchableOpacity, 
 import * as french  from '../../db/french/A1/exercises';
 import {db} from '../../db'
 import { BackHandler } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+
 
 // import db from '../../db/${select}/A1'
 // let select = ''
@@ -25,7 +27,7 @@ export default class LessonList extends Component {
     }
 
     handleBackButtonClick() {
-        //  this.props.navigation.goBack();
+        //  this.props.navigation.goBack(); 
          this.props.navigate('Lessons')
         return true;
     }
@@ -129,7 +131,7 @@ export default class LessonList extends Component {
 
     }
 
-    async videoCount(){
+    async videoCount(video){
         try {
             const value = await AsyncStorage.getItem(this.props.language);
             console.log('value in async,', value);
@@ -158,7 +160,7 @@ export default class LessonList extends Component {
             console.log(error)
           }
         
-    //   this.props.navigate('Screen', {video: item.video} )
+      this.props.navigate('Screen', {video: video} )
     }
 
 
@@ -175,10 +177,11 @@ export default class LessonList extends Component {
                     renderItem = { ({item})=>
                     
                     <View style = {styles.flatCard} >
-                        <Text style= {[styles.text, styles.title ]} > Lesson{item.lesson}: {item.lessontitle} </Text>
+                        <Text style= {[styles.text, styles.title ]} > <Icon name="title" size={29} color={'#fff'} style = {[styles.myIc]} /> Lesson{item.lesson}: {item.lessontitle} </Text>
                         <Text style ={styles.topic}> Topics </Text>
                         <FlatList
                             data= {item.lessons}
+                            onScrollBeginDrag={this.props.onScroll}
                             keyExtractor={(x,i)=> i}
                             renderItem = { ({item})=>
                                 <View>
@@ -186,16 +189,17 @@ export default class LessonList extends Component {
                                 </View>
                             }
                         />
-                        <TouchableOpacity onPress={ this.videoCount.bind(this) } style = {[styles.video]} >
-                        {/* <Image style = {styles.logo} source = {require('../../images/video.png')} /> */}
-                            <Text style = {styles.text2}>Watch Video </Text>
-                        </TouchableOpacity>
-                        {/* {this.data.bind(this, item.lesson)}  */}
-                        {/* ()=> this.props.navigate('Exercises', {exercise: item} ) */}
-                        <TouchableOpacity onPress={this.data.bind(this, item.lesson,) } style = {[styles.test]} >
-                            <Text style = {styles.text2}>Take text </Text>
-                        </TouchableOpacity>
-                        
+                        <View style ={styles.main} >
+                            <TouchableOpacity onPress={ this.videoCount.bind(this, item.video) } style = {[styles.video]} >
+                                <Icon name="ondemand-video" size={29} color={'#fff'} style = {[styles.myIc]} />
+                                <Text style = {styles.text2}> Video </Text>
+                            </TouchableOpacity>
+                            
+                            <TouchableOpacity onPress={this.data.bind(this, item.lesson,) } style = {[styles.test]} >
+                                <Icon name="assessment" size={30} color={'#fff'} style = {[styles.myIc]} />
+                                <Text style = {styles.text2}>Exercise </Text>
+                            </TouchableOpacity>
+                        </View>
                         
                         
                     </View>
@@ -222,9 +226,9 @@ const styles = StyleSheet.create({
     },
     text: {
         // backgroundColor: '#95a5a6',
-        color: '#3498db',
+        color: '#fff',
         padding: 5,
-        fontSize: 15
+        fontSize: 20
     },
     text2: {
         // backgroundColor: '#95a5a6',
@@ -239,7 +243,9 @@ const styles = StyleSheet.create({
         color: '#2c3e50'
     },
     lessons: {
-        color: '#7f8c8d'
+        color: '#7f8c8d',
+        lineHeight: 23,
+        paddingLeft: 10,
     },
     flatCard: {
         display: 'flex',
@@ -251,25 +257,38 @@ const styles = StyleSheet.create({
 
     },
     title: {
-        textAlign: 'center'
+        textAlign: 'center',
+        backgroundColor: '#8e44ad',
+        borderTopRightRadius: 7,
+        borderTopLeftRadius: 7,
+    },
+    main: {
+        backgroundColor: '#34495e',
+        flexDirection: 'row',
+        justifyContent: 'space-between'
     },
     video: {
         display: 'flex',
+        flexDirection: 'row',
         justifyContent: 'center',
         backgroundColor: '#e74c3c',
         width: 40+ '%',
         height: 50,
         alignSelf: 'flex-end',
         margin:10 ,
-        alignContent: 'flex-start'
+        alignItems: 'center',
+        borderRadius: 7
     },
     test: {
         display: 'flex',
+        flexDirection: 'row',
         justifyContent: 'center',
+        alignItems: 'center',
         backgroundColor: '#2ecc71',
         width: 40+ '%',
-        height: 30,
-        margin: 10
+        height: 50,
+        margin: 10,
+        borderRadius: 7
 
     }
 })

@@ -1,18 +1,22 @@
 import React, { Component } from 'react';
 import { inject } from 'mobx-react'
-import { Text, View, StyleSheet, AsyncStorage, TouchableOpacity, Image, ProgressBarAndroid, StatusBar } from 'react-native';
+import { Text, View, StyleSheet, AsyncStorage, TouchableOpacity,ToastAndroid, Image, ProgressBarAndroid, StatusBar, Dimensions } from 'react-native';
 import Completed from './completed';
-
+import ImagePicker from 'react-native-image-picker'
+import Icon from 'react-native-vector-icons/MaterialIcons';
 // import ProgressBarClassic from 'react-native-progress-bar-classic';
 // import ProgressBarClassic from 'react-native-horizontal-progress-bar'
 import * as Progress from 'react-native-progress';
  
-
+let {height, width} = Dimensions.get('window');
 @inject("stores")
 class CoursesCompleted extends Component {
 
     constructor(){
         super();
+        this.state = {
+            avatarSource: ''
+        }
        
     }
 
@@ -21,9 +25,80 @@ class CoursesCompleted extends Component {
         this.getEM()
     }
 
-    componentDidMount(){
+   async componentDidMount(){
         console.log({storeesToken: this.props.stores.config.Token})
+        await this.getImg()
 
+    }
+    async getImg(){
+        await AsyncStorage.getItem('avatarSource').then((img)=>{
+            let value = JSON.parse(img)
+            console.log('value in setState', value)
+            if(value !== null){
+                this.setState({
+                    avatarSource: value
+                })
+            }
+        })
+    }
+    async changeImg(){
+        let options = {
+            title: 'Select Avatar',
+            // customButtons: [
+            //   {name: 'fb', title: 'Choose Photo from Facebook'},
+            // ],
+            storageOptions: {
+              skipBackup: true,
+              path: 'images'
+            }
+          };
+        ImagePicker.showImagePicker(options, async (response) => {
+            console.log('Response = ', response);
+          
+            if (response.didCancel) {
+              console.log('User cancelled image picker');
+            }
+            else if (response.error) {
+              console.log('ImagePicker Error: ', response.error);
+            }
+            else if (response.customButton) {
+              console.log('User tapped custom button: ', response.customButton);
+            }
+            else {
+              let source = { uri: response.uri };
+              ToastAndroid.show(
+                'Image has been selected',
+                ToastAndroid.SHORT,
+              );
+          
+              // You can also display the image using data:
+              // let source = { uri: 'data:image/jpeg;base64,' + response.data };
+              source = JSON.stringify(source)
+              console.log(source)
+              await AsyncStorage.setItem('avatarSource',source).then((val)=>{
+                console.log({"stored item error":val})
+            })
+           let img = await AsyncStorage.getItem('avatarSource')
+           console.log('image selected', img)
+          
+              this.setState({
+                avatarSource: source
+              });
+              await this.getImg();
+            }
+          });
+    }
+    userProfile () {
+        if(this.state.avatarSource == "") {
+            return (
+                <Icon name="perm-identity" size={100} color={'#00BCD4'}  />
+            )
+        }
+        else {
+            return (
+                <Image style={styles.logo3} source={this.state.avatarSource} />
+            )
+        }
     }
     async getEM(){
         try {
@@ -62,32 +137,18 @@ class CoursesCompleted extends Component {
                         <View style= {styles.logoContainer}>
                             <Image style = {styles.logo} source = {require('../../images/olango.png')} />
                         </View>
-                        <TouchableOpacity style= {styles.logoContainer}>
+                        <TouchableOpacity onPress={()=>navigate('AdminHome')} style= {styles.logoContainer}>
                             <Image style = {styles.logo2} source = {require('../../images/msg.png')}/>
                         </TouchableOpacity>
                     </View>
-                    <View style ={styles.progress} >
-                    <View style ={styles.space} >
-                        <Text style = {styles.prog} >spanish 30% </Text>
-                        <Progress.Bar 
-                            progress = {0.3} 
-                            height = {30}
-                            color = {'#2ecc71'}  
-                        />
-                    </View>
-                    <View style ={styles.space} >
-                    <Text style = {styles.prog} >French 50% </Text>
-                    <Progress.Bar 
-                        progress = {0.5} 
-                        height = {30}
-                        color = {'#2ecc71'}
-                        
-                    />
-                    </View>
+                    <View style = {styles.dp} >
+                        <TouchableOpacity onPress={this.changeImg.bind(this)} style = {styles.prof}>
+                            {this.userProfile()}
+                        </TouchableOpacity>
                     </View>
                 </View>
                 <View style = {styles.card} > 
-                    <Text style = {styles.learn} > Learn a Language </Text>
+                    <Text style = {styles.learn} > Completed Courses </Text>
                     <Completed {...this.props}/>
                 </View>
             </View>
@@ -104,12 +165,32 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         paddingTop: 20
     },
-    
+    dp: {
+        flex: 4,
+        backgroundColor: '#34495e',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
     top: {
         elevation: 7,
         backgroundColor: '#34495e',
         flex: 1
 
+    },
+    prof: {
+        height: 120,
+        borderRadius: 60,
+        width: 120,
+        backgroundColor: '#FFFFFF',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    logo3: {
+        height: 120,
+        borderRadius: 60,
+        width: 120,
+        resizeMode: 'cover',
+        
     },
     row: {
         marginTop: '1%',
@@ -120,11 +201,19 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between'
     },
     logoContainer: {
-        
+        marginTop: 10
+    },
+    ImglogoContainer: {
+        width: '100%'
+    },
+    uploadAvatar: {
+        backgroundColor: '#fff',
+        width: '100%'
     },
     logo: {
         height: 40,
         width: 120,
+        alignSelf: 'flex-start',
         resizeMode: 'contain'
        
     },
@@ -159,9 +248,9 @@ const styles = StyleSheet.create({
     },
     progress: {
         
-        // width: 100,
-        // backgroundColor: '#fff',
-        display: 'flex',
+        width: 100,
+        backgroundColor: '#fff',
+        
         alignItems: 'center',
         justifyContent: 'center'
     },

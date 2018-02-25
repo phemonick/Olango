@@ -6,8 +6,6 @@ window.navigator.userAgent = 'react-native'
  const io = require('react-native-socket.io-client/socket.io');
 
 
-const USER_ID = '@userId';
-
 class ChatBody extends React.Component {
 
   constructor(props) {
@@ -19,16 +17,18 @@ class ChatBody extends React.Component {
       token: '',
       sent: ''
     };
-    
+    this.getToken();
     // this.onReceivedMessage = this.onReceivedMessage.bind(this);
-    this.socket = io('https://chatapis.herokuapp.com');
+    this.socket = io('https://olangochat.herokuapp.com');
     this.socket.on('connect', ()=>{
         console.log('connected to server')
-        let params = {
-          room1: 'yoruba.english',
-          room2: 'english.yoruba'
+        const { params } = this.props.navigation.state
+        console.log({getInParams: this.state.username, data: params.name})
+        let param = {
+          room1: `${this.state.username}.${params.name}`,
+          room2: `${params.name}.${this.state.username}`
         }
-        this.socket.emit('join', params);
+        this.socket.emit('join', param);
     }) 
     // this.socket.on('newMessage', (data)=>{
     //   console.log({dataReceived: data})
@@ -84,10 +84,11 @@ class ChatBody extends React.Component {
 
  async getMessages(){
 
-    await this.getToken()
+    // await this.getToken()
     try{
       console.log(this.state.token)
-      let response = await fetch('https://chatapis.herokuapp.com/api/v1/chat/english.yoruba', {
+      const { params } = this.props.navigation.state
+      let response = await fetch(`https://olangochat.herokuapp.com/api/v1/chat/${params.name}.${this.state.username}`, {
       headers: {
           'Authorization': this.state.token,
           'Accept': 'application/json',
@@ -95,8 +96,9 @@ class ChatBody extends React.Component {
       }
   })
   let res = await response.json()
+  console.log({resInHistory: res});
   this.formatoSaveMessage(res)
-  console.log(res);
+ 
 
     }
     catch(error){
@@ -172,7 +174,8 @@ class ChatBody extends React.Component {
   async sendMessage(message){
     try{
       console.log("when we send", message)
-      let response = await fetch('https://chatapis.herokuapp.com/api/v1/chat/english.yoruba', {
+      const { params } = this.props.navigation.state
+      let response = await fetch(`https://olangochat.herokuapp.com/api/v1/chat/${params.name}.${this.state.username}`, {
             method: 'POST',
             headers: {
               'Authorization': this.state.token,
@@ -181,7 +184,7 @@ class ChatBody extends React.Component {
           },
           body: JSON.stringify({
             message: message,
-            secondUser: "english"
+            secondUser: `${params.name}`
          })
         })
         let res = await response.json()

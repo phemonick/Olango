@@ -13,7 +13,7 @@ export default class UsersStore{
     async getChats(token){
         
         try{
-            let response = await fetch('https://chatapiendpoint.herokuapp.com/api/v1/chats', {
+            let response = await fetch('https://olangochat.herokuapp.com/api/v1/chats', {
       headers: {
           'Authorization': token,
           'Accept': 'application/json',

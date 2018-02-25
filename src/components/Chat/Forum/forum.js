@@ -1,9 +1,28 @@
 import React, {Component} from 'react';
-import { Text, View,StatusBar, StyleSheet } from 'react-native';
+import { Text, View,StatusBar, StyleSheet, BackHandler } from 'react-native';
 import ForumBody from './forumBody'
 import General from './General'
 
 export default class Forum extends Component{
+
+    constructor(){
+        super()
+        this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
+    }
+    componentWillUnmount() {
+        BackHandler.removeEventListener('hardwareBackPress', this.handleBackButtonClick);
+    }
+
+    handleBackButtonClick() {
+        //  this.props.navigation.goBack();
+         this.props.navigation.navigate('Hom')
+        return true;
+    }
+    
+    componentWillMount(){
+        BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick);
+    }
+
 
     render(){
         return(
