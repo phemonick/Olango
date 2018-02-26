@@ -9,6 +9,7 @@ import {
   ListView,
   Platform,
   Alert,
+  Text,
   BackHandler,
   StatusBar,
   View
@@ -18,6 +19,7 @@ import {
 import io from 'socket.io-client';
 
 const socket = null;
+let _this
 
 import {
   RTCPeerConnection,
@@ -183,7 +185,7 @@ function getLocalStream(isFront, callback) {
       }
     });
   }
-//   getting audio and video tream
+//   getting audio and video stream
 // set video to false for audio only
   getUserMedia({
     audio: true, 
@@ -206,17 +208,24 @@ function getLocalStream(isFront, callback) {
     }
   }, function (stream) {
     console.log('getUserMedia success', stream);
+    _this.setState({
+      currScreen: 'renderVideo'
+    })
     callback(stream);
   }, logError);
 }
 
 function join(roomID) {
   socket
+  // collection of connected ids
     .emit('join', roomID, function (socketIds) {
       console.log('join', socketIds);
       for (const i in socketIds) {
         const socketId = socketIds[i];
         createPC(socketId, true);
+        _this.setState({
+          currScreen: 'renderVideo'
+        })
       }
     });
 }
@@ -270,6 +279,14 @@ function createPC(socketId, isOffer) {
     if (event.target.iceConnectionState === 'connected') {
       createDataChannel();
     }
+    if (pc.iceConnectionState === "failed" ||
+    pc.iceConnectionState === "disconnected" ||
+    pc.iceConnectionState === "closed") {
+      alert('could not connect')
+      _this.setState({
+        currScreen: 'home'
+      })
+};
   };
   pc.onsignalingstatechange = function (event) {
     console.log('onsignalingstatechange', event.target.signalingState);
@@ -287,6 +304,11 @@ function createPC(socketId, isOffer) {
   };
 //   listenig to when user disconnect
   pc.onremovestream = function (event) {
+    this.setState({
+      videoConnection: 'Disconnected'
+    })
+    
+    
     console.log('onremovestream', event.stream);
   };
   //adding stream to ui
@@ -396,23 +418,25 @@ const container = {};
 // const RCTWebRTCDemo = React.createClass({
 export default class live extends Component {
 
+  state = {
+    currScreen: 'connecting',
+    videoConnection: '',
+    info: 'Connecting',
+    status: 'init', 
+    roomID: this.roomKey,
+    isFront: true,
+    selfViewSrc: null,
+    remoteList: {},
+    textRoomConnected: false,
+    textRoomData: [],
+    textRoomValue: ''
+  }
   constructor(props) {
     super(props)
     this.ds = new ListView.DataSource({
       rowHasChanged: (r1, r2) => true
     }); 
     let roomKey = Base64.encode('spanish');
-    this.state = {
-      info: 'Connecting',
-      status: 'init', 
-      roomID: roomKey,
-      isFront: true,
-      selfViewSrc: null,
-      remoteList: {},
-      textRoomConnected: false,
-      textRoomData: [],
-      textRoomValue: ''
-    }
 
     // let fireScratch = this.props.dbHandle
     // this.callz = fireScratch
@@ -423,9 +447,9 @@ export default class live extends Component {
     this.componentDidMount = this
       .componentDidMount
       .bind(this);
-    this._press = this
-      ._press
-      .bind(this);
+    // this._press = this
+    //   ._press
+    //   .bind(this);
     this._switchVideoType = this
       ._switchVideoType
       .bind(this);
@@ -440,13 +464,15 @@ export default class live extends Component {
       .bind(this);
 
     container = this;
+  //  socket = io.connect('http://127.0.0.1:4443', {transports: ['websocket']});
     socket = io.connect('https://react-native-webrtc.herokuapp.com', {transports: ['websocket']})
     socket.on('exchange', function (data) {
       exchange(data);
     });
-
+    // when u disconnect
     socket.on('leave', function (socketId) {
       leave(socketId);
+      //goto home
     });
 
     socket.on('connect', function (data) {
@@ -458,15 +484,18 @@ export default class live extends Component {
         });
         container.setState({
           status: 'ready',
-          info: 'Connecting to server...'
+          info: 'Connecting ...'
         });
+        console.log(roomKey)
         join(roomKey);
       });
     });
     // this.getUserMedia();
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    _this = this
+  }
 
 //   _press() {
 //     this
@@ -551,8 +580,8 @@ export default class live extends Component {
     );
   }
 
-  render() {
-    return (
+  renderVideo(){
+    return(
       <View style={styles.wrapper}>
         <StatusBar
             backgroundColor="#0c3959"
@@ -573,14 +602,51 @@ export default class live extends Component {
               return <RTCView key={index} streamURL={remote} style={styles.remoteView}/>
             })
           }
+            <Text> {this.state.videoConnection} </Text>
           </View>
         </ScrollView>
       </View>
-    );
+    )
+  }
+  renderConnect(){
+    return(
+      <View style = {styles.container}>
+        <StatusBar
+            backgroundColor="#0c3959"
+            barStyle="light-content"
+        />
+        <View>
+          <Text> {this.state.info} </Text>
+        </View>
+      </View>
+    )
+  }
+
+  render() {
+    switch (this.state.currScreen) {
+      case 'connect':
+        return this.renderConnect();
+        break;
+      case 'userList':
+        return this.renderList();
+        break;
+      case 'renderVideo':
+      return this.renderVideo();
+      break;
+      case 'renderVideo':
+        return this.props.navigation.navigate('Hom')
+        break;
+      default:
+ 
+    }
+    return this.renderConnect();
   }
 }
 
 const styles = {
+  container: {
+    flex: 1
+  },
   selfView: {
     width: 200,
     height: 150
